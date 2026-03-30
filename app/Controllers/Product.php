@@ -95,4 +95,31 @@ class Product extends BaseController
         // Konsisten menggunakan 'success' agar ditangkap SweetAlert di View
         return redirect()->to('/product')->with('success', 'Data produk berhasil dihapus dari database.');
     }
+
+    public function update($id)
+{
+    $model = new \App\Models\ProductModel();
+
+    // Validasi input
+    if (!$this->validate([
+        'nama_produk' => 'required',
+        'kode_produk' => "required|is_unique[products.kode_produk,id,{$id}]", // Unik kecuali untuk ID ini sendiri
+        'harga_beli'  => 'required|numeric',
+        'harga_jual'  => 'required|numeric',
+        'stok'        => 'required|numeric',
+    ])) {
+        return redirect()->back()->withInput()->with('error', 'Gagal update: Data tidak valid atau Kode Produk sudah ada.');
+    }
+
+    $model->update($id, [
+        'kode_produk' => $this->request->getPost('kode_produk'),
+        'nama_produk' => $this->request->getPost('nama_produk'),
+        'kategori'    => $this->request->getPost('kategori'),
+        'harga_beli'  => $this->request->getPost('harga_beli'),
+        'harga_jual'  => $this->request->getPost('harga_jual'),
+        'stok'        => $this->request->getPost('stok'),
+    ]);
+
+    return redirect()->to('/product')->with('success', 'Data produk berhasil diperbarui!');
+}
 }
