@@ -16,6 +16,7 @@ $routes->get('product', 'Product::index');
 $routes->post('product/save', 'Product::save');
 $routes->get('product/delete/(:num)', 'Product::delete/$1');
 $routes->get('kasir', 'Kasir::index');
-$routes->post('kasir/add', 'Kasir::addToCart');
+$routes->post('kasir/addToCart', 'Kasir::addToCart');
+$routes->get('kasir/remove/(:any)', 'Kasir::remove/$1');
 $routes->get('kasir/clear', 'Kasir::clearCart');
 $routes->post('kasir/checkout', 'Kasir::checkout');

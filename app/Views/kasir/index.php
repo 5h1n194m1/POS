@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-md-12">
-                        <form action="<?= base_url('kasir/add') ?>" method="POST" id="form-add">
+                        <form id="form-add">
                             <?= csrf_field() ?>
                             <div class="input-group input-group-lg">
                                 <div class="input-group-prepend">
@@ -22,7 +22,7 @@
                                     <?php endforeach; ?>
                                 </select>
                                 
-                                <input type="number" name="qty" value="1" class="form-control col-2" placeholder="Qty" min="1">
+                                <input type="number" name="qty" id="input-qty" value="1" class="form-control col-2" placeholder="Qty" min="1">
                                 
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-primary shadow-sm">
@@ -30,13 +30,13 @@
                                     </button>
                                 </div>
                             </div>
-                            <small class="text-muted mt-2 d-block ml-1">Tips: Tekan <b>F2</b> untuk mencari barang, tekan <b>F8</b> untuk pembayaran.</small>
+                            <small class="text-muted mt-2 d-block ml-1">Tips: <b>Enter</b> di pencarian -> <b>Enter</b> di Qty (Barang Masuk). <b>F8</b> untuk bayar.</small>
                         </form>
                     </div>
                 </div>
 
                 <div class="table-responsive" style="height: 400px; overflow-y: auto; border: 1px solid #dee2e6;">
-                    <table class="table table-sm table-striped table-hover table-bordered mb-0">
+                    <table class="table table-sm table-striped table-hover table-bordered mb-0" id="table-cart">
                         <thead class="bg-dark text-white text-center">
                             <tr>
                                 <th>Produk</th>
@@ -59,15 +59,12 @@
                                 <td class="text-center align-middle"><?= $item['qty'] ?></td>
                                 <td class="text-right align-middle font-weight-bold text-primary px-3">Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
                                 <td class="text-center align-middle">
-                                    <a href="<?= base_url('kasir/remove/'.$id) ?>" class="btn btn-xs btn-outline-danger" title="Hapus"><i class="fas fa-trash"></i></a>
+                                    <button type="button" class="btn btn-xs btn-outline-danger btn-remove" data-id="<?= $id ?>"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
                             <?php endforeach; else: ?>
-                            <tr>
-                                <td colspan="5" class="text-center py-5 text-muted small italic">
-                                    <i class="fas fa-shopping-basket fa-3x mb-3 d-block opacity-50"></i>
-                                    Keranjang masih kosong.
-                                </td>
+                            <tr class="empty-row">
+                                <td colspan="5" class="text-center py-5 text-muted small italic">Keranjang masih kosong.</td>
                             </tr>
                             <?php endif; ?>
                         </tbody>
@@ -108,11 +105,11 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success btn-block btn-lg shadow-lg mt-4 py-3 <?= ($grandTotal <= 0) ? 'disabled' : '' ?>" <?= ($grandTotal <= 0) ? 'disabled' : '' ?>>
-                        <i class="fas fa-print mr-2"></i> SELESAI & CETAK (Enter)
+                    <button type="submit" id="btn-checkout" class="btn btn-success btn-block btn-lg shadow-lg mt-4 py-3 <?= ($grandTotal <= 0) ? 'disabled' : '' ?>" <?= ($grandTotal <= 0) ? 'disabled' : '' ?>>
+                        <i class="fas fa-print mr-2"></i> SELESAI & CETAK
                     </button>
                     
-                    <a href="<?= base_url('kasir/clear') ?>" class="btn btn-outline-danger btn-block btn-sm mt-3 border-0" onclick="return confirm('Yakin ingin membatalkan transaksi ini?')">
+                    <a href="<?= base_url('kasir/clear') ?>" class="btn btn-outline-danger btn-block btn-sm mt-3 border-0" onclick="return confirm('Batalkan seluruh transaksi?')">
                         <i class="fas fa-trash-alt mr-1"></i> Batalkan Transaksi
                     </a>
                 </form>
@@ -125,60 +122,119 @@
 <?= $this->section('script') ?>
 <script>
     $(document).ready(function() {
-        const grandTotal = <?= $grandTotal ?>;
+        let currentTotal = <?= $grandTotal ?>;
         const inputBayar = $('#input-bayar');
+        const inputQty = $('#input-qty');
         const labelKembalian = $('#label-kembalian');
+        const labelGrandTotal = $('#label-grandtotal');
 
         // 1. Inisialisasi Select2
         $('#scan-barcode').select2({
             theme: 'bootstrap4',
-            placeholder: 'Ketik Nama Produk atau Kode...',
-            allowClear: true,
-            width: 'resolve'
+            placeholder: 'Cari Produk...',
+            allowClear: true
+        }).select2('open');
+
+        // 2. Alur Keyboard: Pilih barang -> Lompat ke Qty
+        $('#scan-barcode').on('select2:select', function (e) {
+            inputQty.focus().select(); 
         });
 
-        // 2. Fokus otomatis ke pencarian saat halaman dimuat
-        $('#scan-barcode').select2('open');
-
-        // 3. Fokuskan kursor ke kolom cari di dalam Select2 saat terbuka
-        $(document).on('select2:open', () => {
-            setTimeout(() => {
-                document.querySelector('.select2-search__field').focus();
-            }, 10);
+        // 3. Trigger Enter di Qty untuk Submit via AJAX
+        inputQty.on('keypress', function(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                $('#form-add').submit();
+            }
         });
 
-        // 4. Hitung kembalian secara Live
-        inputBayar.on('input', function() {
-            const bayar = parseFloat($(this).val()) || 0;
-            const kembalian = bayar - grandTotal;
+        // 4. AJAX Tambah Barang (Tanpa Reload)
+        $('#form-add').on('submit', function(e) {
+            e.preventDefault();
+            const productId = $('#scan-barcode').val();
+            if(!productId) return;
+
+            $.ajax({
+                url: "<?= base_url('kasir/addToCart') ?>",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        updateTable(response.cart, response.total);
+                        // Reset form dan kembali fokus ke pencarian
+                        $('#scan-barcode').val(null).trigger('change');
+                        $('#scan-barcode').select2('open');
+                        inputQty.val(1);
+                    } else {
+                        Swal.fire('Gagal', response.message, 'error');
+                    }
+                }
+            });
+        });
+
+        // 5. Fungsi Update Tabel Secara Instan
+        function updateTable(cart, total) {
+            let html = '';
+            currentTotal = total;
             
+            $.each(cart, function(id, item) {
+                html += `<tr>
+                    <td class="align-middle px-3 text-bold">${item.name}</td>
+                    <td class="align-middle text-center">Rp ${parseInt(item.price).toLocaleString('id-ID')}</td>
+                    <td class="text-center align-middle">${item.qty}</td>
+                    <td class="text-right align-middle font-weight-bold text-primary px-3">Rp ${parseInt(item.subtotal).toLocaleString('id-ID')}</td>
+                    <td class="text-center align-middle">
+                        <button type="button" class="btn btn-xs btn-outline-danger btn-remove" data-id="${id}"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>`;
+            });
+
+            $('#table-cart tbody').html(html);
+            labelGrandTotal.text('Rp ' + total.toLocaleString('id-ID'));
+            inputBayar.attr('min', total);
+            
+            // Aktifkan tombol checkout
+            if(total > 0) {
+                $('#btn-checkout').removeClass('disabled').prop('disabled', false);
+            }
+            calculateReturn();
+        }
+
+        // 6. AJAX Hapus Item (Tanpa Reload)
+        $(document).on('click', '.btn-remove', function() {
+            const id = $(this).data('id');
+            $.ajax({
+                url: "<?= base_url('kasir/remove') ?>/" + id,
+                type: "GET",
+                dataType: "JSON",
+                success: function(response) {
+                    updateTable(response.cart, response.total);
+                }
+            });
+        });
+
+        // 7. Live Kembalian
+        function calculateReturn() {
+            const bayar = parseFloat(inputBayar.val()) || 0;
+            const kembalian = bayar - currentTotal;
             if (kembalian >= 0) {
-                labelKembalian.text('Rp ' + kembalian.toLocaleString('id-ID'));
-                labelKembalian.removeClass('text-danger').addClass('text-success');
+                labelKembalian.text('Rp ' + kembalian.toLocaleString('id-ID')).removeClass('text-danger').addClass('text-success');
             } else {
-                labelKembalian.text('Rp 0');
-                labelKembalian.removeClass('text-success').addClass('text-danger');
+                labelKembalian.text('Rp 0').removeClass('text-success').addClass('text-danger');
             }
-        });
+        }
+        inputBayar.on('input', calculateReturn);
 
-        // 5. Keyboard Shortcuts
+        // 8. Shortcuts Keyboard
         $(document).on('keydown', function(e) {
-            // F2 untuk fokus/buka pencarian barang
-            if (e.key === 'F2') {
-                e.preventDefault();
-                $('#scan-barcode').select2('open');
-            }
-            // F8 untuk fokus ke input pembayaran
-            if (e.key === 'F8') {
-                e.preventDefault();
-                inputBayar.focus();
-            }
+            if (e.key === 'F2') { e.preventDefault(); $('#scan-barcode').select2('open'); }
+            if (e.key === 'F8') { e.preventDefault(); inputBayar.focus().select(); }
         });
 
-        // 6. Otomatis buka nota di tab baru jika transaksi berhasil
+        // 9. Auto-open nota
         <?php if(session()->getFlashdata('print_id')): ?>
-            const notaUrl = '<?= base_url('kasir/nota/'.session()->getFlashdata('print_id')) ?>';
-            window.open(notaUrl, '_blank');
+            window.open('<?= base_url('kasir/nota/'.session()->getFlashdata('print_id')) ?>', '_blank');
         <?php endif; ?>
     });
 </script>

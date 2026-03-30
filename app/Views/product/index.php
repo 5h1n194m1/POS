@@ -71,7 +71,7 @@
                     <?php else: ?>
                         <tr>
                             <td colspan="7" class="text-center py-5 text-muted">
-                                <i class="fas fa-box open fs-1 d-block mb-2 opacity-25"></i>
+                                <i class="fas fa-box-open fs-1 d-block mb-2 opacity-25"></i>
                                 Belum ada data produk.
                             </td>
                         </tr>
@@ -97,7 +97,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="small font-weight-bold">Kode Produk</label>
-                            <input type="text" name="kode_produk" class="form-control" value="<?= old('kode_produk') ?>" required>
+                            <input type="text" name="kode_produk" id="add-kode" class="form-control" value="<?= old('kode_produk') ?>" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="small font-weight-bold">Kategori</label>
@@ -188,25 +188,24 @@
 <?= $this->section('script') ?>
 <script>
     $(document).ready(function() {
+        
+        // Auto-fokus ke input Kode saat modal Tambah dibuka
+        $('#addModal').on('shown.bs.modal', function () {
+            $('#add-kode').focus();
+        });
+
         // Fungsi Klik Tombol Edit
         $('.btn-edit').on('click', function() {
-            // Ambil data dari atribut button
-            const id = $(this).data('id');
-            const kode = $(this).data('kode');
-            const nama = $(this).data('nama');
-            const kategori = $(this).data('kategori');
-            const beli = $(this).data('beli');
-            const jual = $(this).data('jual');
-            const stok = $(this).data('stok');
+            const data = $(this).data();
 
             // Masukkan ke input modal edit
-            $('#edit-id').val(id);
-            $('#edit-kode').val(kode);
-            $('#edit-nama').val(nama);
-            $('#edit-kategori').val(kategori);
-            $('#edit-beli').val(beli);
-            $('#edit-jual').val(jual);
-            $('#edit-stok').val(stok);
+            $('#edit-id').val(data.id);
+            $('#edit-kode').val(data.kode);
+            $('#edit-nama').val(data.nama);
+            $('#edit-kategori').val(data.kategori);
+            $('#edit-beli').val(data.beli);
+            $('#edit-jual').val(data.jual);
+            $('#edit-stok').val(data.stok);
 
             // Tampilkan Modal Edit
             $('#editModal').modal('show');
@@ -224,7 +223,7 @@
             });
         <?php endif; ?>
 
-        // Pop-up Sukses
+        // Pop-up Sukses (Toast style)
         <?php if (session()->getFlashdata('success')) : ?>
             const Toast = Swal.mixin({
                 toast: true,
