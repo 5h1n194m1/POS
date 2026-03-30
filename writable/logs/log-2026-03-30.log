@@ -302,3 +302,1745 @@ DEBUG - 2026-03-30 03:02:55 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-03-30 03:02:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-03-30 03:03:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-03-30 03:03:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:44:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:48:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:48:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:48:01 --> Table 'pos.produk' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `produk`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1678): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `produk`', null, false)
+ 5 APPPATH\Controllers\Dashboard.php(30): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:48:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.produk' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1678): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `produk`', null, false)
+ 2 APPPATH\Controllers\Dashboard.php(30): CodeIgniter\Database\BaseBuilder->countAll()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:48:01 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.produk' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1678): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `produk`', null, false)
+ 4 APPPATH\Controllers\Dashboard.php(30): CodeIgniter\Database\BaseBuilder->countAll()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:48:01 --> [Caused by] mysqli_sql_exception: Table 'pos.produk' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `produk`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `produk`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1678): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `produk`', null, false)
+ 5 APPPATH\Controllers\Dashboard.php(30): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:50:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:50:26 --> Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:26 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+[Method: GET, Route: product]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 2 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 4 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:26 --> [Caused by] mysqli_sql_exception: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:50:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:50:27 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:27 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:50:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:50:29 --> Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+[Method: GET, Route: product]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 2 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:29 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 4 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:29 --> [Caused by] mysqli_sql_exception: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:50:31 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:31 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:31 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:31 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:50:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:50:41 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:50:41 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:12 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:12 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:13 --> Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:13 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+[Method: GET, Route: product]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 2 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:13 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 4 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:13 --> [Caused by] mysqli_sql_exception: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:15 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:15 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 06:51:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:17 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:17 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:17 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:17 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:28 --> Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:28 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+[Method: GET, Route: product]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 2 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:28 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 4 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:28 --> [Caused by] mysqli_sql_exception: Table 'pos.products' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT *
+FROM `products`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `products`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `products`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `products`', [], false)
+ 5 SYSTEMPATH\Model.php(253): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Product.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->index()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+10 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 06:51:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 06:51:41 --> Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:41 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 2 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:41 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 4 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 06:51:41 --> [Caused by] mysqli_sql_exception: Table 'pos.penjualan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = \'2026-03-30\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT SUM(`total_bayar`) AS `total_bayar`
+FROM `penjualan`
+WHERE DATE(tanggal_jual) = :DATE(tanggal_jual):', [...], false)
+ 5 APPPATH\Controllers\Dashboard.php(39): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:01:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:01:29 --> Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:29 --> CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:29 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:29 --> [Caused by] mysqli_sql_exception: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:38 --> ParseError: syntax error, unexpected identifier "id", expecting "," or ";"
+[Method: GET, Route: product]
+in APPPATH\Models\ProductModel.php on line 10.
+ 1 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\pos\\vendor\\composer/../../app\\Models\\ProductModel.php')
+ 2 APPPATH\Controllers\Product.php(13): Composer\Autoload\ClassLoader->loadClass('App\\Models\\ProductModel')
+ 3 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\Product->__construct()
+ 4 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:01:40 --> Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:40 --> [Caused by] mysqli_sql_exception: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:01:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:01:43 --> Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:43 --> CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:43 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:01:43 --> [Caused by] mysqli_sql_exception: Expression #1 of ORDER BY clause is not in GROUP BY clause and contains nonaggregated column 'pos.penjualan.tanggal_jual' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 4 APPPATH\Controllers\Dashboard.php(66): CodeIgniter\Database\BaseConnection->query('
+            SELECT DATE(tanggal_jual) as tgl, SUM(total_bayar) as total 
+            FROM penjualan 
+            WHERE tanggal_jual >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+            GROUP BY DATE(tanggal_jual)
+            ORDER BY tanggal_jual ASC
+        ')
+ 5 APPPATH\Controllers\Dashboard.php(47): App\Controllers\Dashboard->_getSalesChartData(Object(CodeIgniter\Database\MySQLi\Connection))
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:03:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:03:55 --> Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.pelanggan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 2 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:55 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 4 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:55 --> [Caused by] mysqli_sql_exception: Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:03:57 --> Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.pelanggan' doesn't exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 2 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:57 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 4 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:03:57 --> [Caused by] mysqli_sql_exception: Table 'pos.pelanggan' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:04:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 07:04:35 --> Unknown column 'penjualan.id_pelanggan' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:04:35 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'penjualan.id_pelanggan' in 'on clause'
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 2 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:04:35 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'penjualan.id_pelanggan' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 4 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 07:04:35 --> [Caused by] mysqli_sql_exception: Unknown column 'penjualan.id_pelanggan' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `penjualan`.*, `pelanggan`.`nama_pelanggan`
+FROM `penjualan`
+LEFT JOIN `pelanggan` ON `pelanggan`.`id_pelanggan` = `penjualan`.`id_pelanggan`
+ORDER BY `tanggal_jual` DESC
+ LIMIT 5', [], false)
+ 5 APPPATH\Controllers\Dashboard.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Dashboard->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:05:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-03-30 07:05:28 --> ParseError: syntax error, unexpected identifier "id", expecting "," or ";"
+[Method: GET, Route: product]
+in APPPATH\Models\ProductModel.php on line 10.
+ 1 VENDORPATH\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\laragon\\www\\pos\\vendor\\composer/../../app\\Models\\ProductModel.php')
+ 2 APPPATH\Controllers\Product.php(13): Composer\Autoload\ClassLoader->loadClass('App\\Models\\ProductModel')
+ 3 SYSTEMPATH\CodeIgniter.php(921): App\Controllers\Product->__construct()
+ 4 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 07:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:06:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:06:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:07:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:07:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:08:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 07:08:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:27:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:27:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:28:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-03-30 09:30:00 --> Duplicate entry 'BRG004' for key 'produk.kode_produk'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (:nama_produk:, :kode_produk:, :kategori:, :harga_beli:, :harga_jual:, :stok:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(752): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Product.php(32): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->save()
+11 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+12 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 09:30:01 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'BRG004' for key 'produk.kode_produk'
+[Method: POST, Route: product/save]
+in SYSTEMPATH\Database\BaseConnection.php on line 865.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (:nama_produk:, :kode_produk:, :kategori:, :harga_beli:, :harga_jual:, :stok:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(752): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Product.php(32): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->save()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 09:30:01 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'BRG004' for key 'produk.kode_produk'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (:nama_produk:, :kode_produk:, :kategori:, :harga_beli:, :harga_jual:, :stok:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(752): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Product.php(32): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->save()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+11 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+CRITICAL - 2026-03-30 09:30:01 --> [Caused by] mysqli_sql_exception: Duplicate entry 'BRG004' for key 'produk.kode_produk'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(910): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(827): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (\'Toples\', \'BRG004\', \'Barang\', \'5000\', \'6000\', \'20\', \'2026-03-30 09:30:00\', \'2026-03-30 09:30:00\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `produk` (`nama_produk`, `kode_produk`, `kategori`, `harga_beli`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES (:nama_produk:, :kode_produk:, :kategori:, :harga_beli:, :harga_jual:, :stok:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(355): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(899): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(668): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(752): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Product.php(32): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Product->save()
+11 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Product))
+12 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\pos\\public\\index.php')
+DEBUG - 2026-03-30 09:30:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:39:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:39:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:39:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:39:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:41:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:41:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:41:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:41:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:41:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:49:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:49:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:51:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:51:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:57:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:58:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:58:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 09:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:02:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:02:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:02:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:02:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:02:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:15:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:17:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:17:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:18:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:18:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:20:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:20:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:20:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-30 10:20:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
