@@ -44,6 +44,29 @@
         <span class="nav-link font-weight-bold text-dark">Sistem Informasi Kasir</span>
       </li>
     </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link d-flex align-items-center" data-toggle="dropdown" href="#">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+            <?= session()->get('fullname') ?> 
+            <span class="badge badge-primary ml-1" style="font-size: 10px;">
+                <?= strtoupper(session()->get('role') ?? 'GUEST') ?>
+            </span>
+          </span>
+          <img src="https://ui-avatars.com/api/?name=<?= urlencode(session()->get('fullname')) ?>&background=random" class="img-circle elevation-1" width="30" alt="User Image">
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow border-0">
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profil Saya
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="<?= base_url('logout') ?>" class="dropdown-item text-danger" onclick="return confirm('Yakin ingin keluar?')">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Logout
+          </a>
+        </div>
+      </li>
+    </ul>
   </nav>
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -55,25 +78,48 @@
       <nav class="mt-3">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
           <li class="nav-header">MENU UTAMA</li>
+          
           <li class="nav-item">
             <a href="<?= base_url('dashboard') ?>" class="nav-link <?= (uri_string() == 'dashboard') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
           </li>
+
+          <?php if (session()->get('role') == 'admin') : ?>
           <li class="nav-item">
             <a href="<?= base_url('product') ?>" class="nav-link <?= (uri_string() == 'product') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-box"></i>
               <p>Data Produk</p>
             </a>
           </li>
+          <?php endif; ?>
+
           <li class="nav-item">
             <a href="<?= base_url('kasir') ?>" class="nav-link <?= (uri_string() == 'kasir') ? 'active' : '' ?>">
               <i class="nav-icon fas fa-shopping-cart"></i>
               <p>Transaksi Kasir</p>
             </a>
           </li>
+
           <li class="nav-header">SISTEM</li>
+          
+          <?php if (session()->get('role') == 'admin') : ?>
+          <li class="nav-item">
+            <a href="<?= base_url('laporan') ?>" class="nav-link <?= (uri_string() == 'laporan') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-file-invoice"></i>
+              <p>Laporan Penjualan</p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="<?= base_url('laporan?filter=semua') ?>" class="nav-link">
+              <i class="nav-icon fas fa-history"></i>
+              <p>Riwayat Transaksi</p>
+            </a>
+          </li>
+          <?php endif; ?>
+
           <li class="nav-item">
             <a href="<?= base_url('logout') ?>" class="nav-link text-danger" onclick="return confirm('Yakin ingin keluar?')">
               <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -112,7 +158,6 @@
             allowClear: true
         });
 
-        // Penyelamat modal (Support data-toggle dan data-bs-toggle)
         $(document).on('click', '[data-toggle="modal"], [data-bs-toggle="modal"]', function(e) {
             e.preventDefault();
             var target = $(this).data('target') || $(this).data('bs-target');

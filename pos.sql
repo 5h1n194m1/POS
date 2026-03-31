@@ -52,7 +52,7 @@ CREATE TABLE `penjualan` (
   `kembalian` decimal(10,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `penjualan` (
 
 LOCK TABLES `penjualan` WRITE;
 /*!40000 ALTER TABLE `penjualan` DISABLE KEYS */;
-INSERT INTO `penjualan` VALUES (1,20000.00,50000.00,30000.00,'2026-03-30 18:03:03'),(2,20000.00,50000.00,30000.00,'2026-03-30 18:06:19');
+INSERT INTO `penjualan` VALUES (1,20000.00,50000.00,30000.00,'2026-03-31 03:05:40');
 /*!40000 ALTER TABLE `penjualan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +88,7 @@ CREATE TABLE `penjualan_detail` (
 
 LOCK TABLES `penjualan_detail` WRITE;
 /*!40000 ALTER TABLE `penjualan_detail` DISABLE KEYS */;
-INSERT INTO `penjualan_detail` VALUES (1,2,1,1,20000.00);
+INSERT INTO `penjualan_detail` VALUES (1,1,1,1,20000.00);
 /*!40000 ALTER TABLE `penjualan_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +111,7 @@ CREATE TABLE `produk` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode_produk` (`kode_produk`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +120,7 @@ CREATE TABLE `produk` (
 
 LOCK TABLES `produk` WRITE;
 /*!40000 ALTER TABLE `produk` DISABLE KEYS */;
-INSERT INTO `produk` VALUES (1,'Kopi','BRG001','Makanan',18000.00,20000.00,49,'2026-03-30 02:49:57','2026-03-30 18:06:19'),(2,'Indomie Goreng','BRG002','Makanan',2500.00,3000.00,50,'2026-03-30 14:00:32','2026-03-30 14:07:38'),(3,'Kopi Kapal Api','BRG003','Minuman',1500.00,2000.00,3,'2026-03-30 14:00:32','2026-03-30 14:07:44'),(6,'Lemari','BRG004','Barang',20000.00,240000.00,20,'2026-03-30 15:56:26','2026-03-30 15:56:26');
+INSERT INTO `produk` VALUES (1,'Kopi','BRG001','Makanan',18000.00,20000.00,50,'2026-03-30 02:49:57','2026-03-31 03:18:39'),(2,'Indomie Goreng','BRG002','Makanan',2500.00,3000.00,50,'2026-03-30 14:00:32','2026-03-31 02:29:42'),(3,'Kopi Kapal Api','BRG003','Minuman',1500.00,2000.00,3,'2026-03-30 14:00:32','2026-03-30 14:07:44'),(6,'Lemari','BRG004','Barang',20000.00,240000.00,30,'2026-03-30 15:56:26','2026-03-31 03:31:02'),(7,'Sapu','BRG006','Rumah tangga',8000.00,12000.00,10,'2026-03-31 03:27:49','2026-03-31 03:27:49');
 /*!40000 ALTER TABLE `produk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-31  2:00:32
+-- Dump completed on 2026-03-31 11:25:39

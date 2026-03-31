@@ -19,7 +19,7 @@ class Dashboard extends BaseController
             'title'              => 'Dashboard POS | Management System',
             'user_name'          => session()->get('nama_user'),
             
-            // Statistik
+            // Statistik (Tetap di-load awal agar angka utama langsung muncul)
             'total_products'     => $db->table('produk')->countAll(),
             'low_stock_count'    => $db->table('produk')->where('stok <=', 5)->countAllResults(),
             
@@ -40,24 +40,30 @@ class Dashboard extends BaseController
                                       ->where('DATE(created_at)', $today)
                                       ->countAllResults(),
 
-            // Data Grafik Mingguan & Bulanan (Tambahan Baru)
+            // Data Grafik
             'chart_data'         => $this->_getSalesChartData($db),
             'chart_monthly'      => $this->_getMonthlySalesData($db),
-            
-            // Transaksi Terakhir
-            'recent_sales' => $db->table('penjualan')
-                                ->select('*') // Ambil semua kolom dari tabel penjualan saja
-                                ->orderBy('created_at', 'DESC')
-                                ->limit(5)
-                                ->get()->getResultArray(),
         ];
 
         return view('dashboard/index', $data);
     }
 
     /**
-     * Data Penjualan 7 Hari Terakhir
+     * Endpoint API untuk Navbar (AJAX)
+     * Untuk mempercepat loading navbar di semua halaman
      */
+    public function getNavbarData()
+    {
+        $db = \Config\Database::connect();
+        $low_stock = $db->table('produk')->where('stok <=', 5)->countAllResults();
+
+        return $this->response->setJSON([
+            'nama_user'       => session()->get('nama_user'),
+            'low_stock_count' => $low_stock,
+            'server_time'     => date('H:i:s')
+        ]);
+    }
+
     private function _getSalesChartData($db)
     {
         return $db->table('penjualan')
@@ -68,16 +74,13 @@ class Dashboard extends BaseController
                   ->get()->getResultArray();
     }
 
-    /**
-     * Data Penjualan Bulanan (12 Bulan Terakhir)
-     */
     private function _getMonthlySalesData($db)
     {
         return $db->table('penjualan')
-                  ->select("DATE_FORMAT(created_at, '%Y-%m') as bulan, SUM(total_harga) as total")
-                  ->where('created_at >=', date('Y-m-d', strtotime('-12 months')))
-                  ->groupBy('bulan')
-                  ->orderBy('bulan', 'ASC')
-                  ->get()->getResultArray();
+              ->select("DATE_FORMAT(created_at, '%Y-%m') as periode, DATE_FORMAT(created_at, '%M %Y') as bulan, SUM(total_harga) as total")
+              ->where('created_at >=', date('Y-m-d', strtotime('-12 months')))
+              ->groupBy('periode, bulan') // Kelompokkan berdasarkan periode juga
+              ->orderBy('periode', 'ASC')   // Urutkan berdasarkan string YYYY-MM agar urutan bulannya benar
+              ->get()->getResultArray();
     }
 }

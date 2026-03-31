@@ -11,12 +11,11 @@ class Product extends BaseController
 
     public function __construct()
     {
-        // Memanggil Model melalui property agar efisien
         $this->productModel = new ProductModel();
     }
 
     /**
-     * Tampilkan Daftar Barang
+     * Tampilkan Halaman Utama (Hanya Load View)
      */
     public function index()
     {
@@ -25,37 +24,54 @@ class Product extends BaseController
         }
 
         $data = [
-            'title'    => 'Manajemen Stok Produk',
-            'products' => $this->productModel->findAll()
+            'title' => 'Manajemen Stok Produk',
+            // Kita tidak mengirim data 'products' di sini lagi, 
+            // karena data akan ditarik via AJAX nanti.
         ];
 
         return view('product/index', $data);
     }
 
     /**
-     * Proses Tambah Barang
+     * Ambil Data JSON untuk Tabel (Dijalankan via AJAX)
+     */
+    public function listData()
+    {
+        try {
+            $products = $this->productModel->orderBy('id', 'DESC')->findAll();
+            
+            return $this->response->setJSON([
+                'status' => 'success',
+                'data'   => $products
+            ]);
+        } catch (\Exception $e) {
+            // Jika ada error, kirimkan pesan error dalam format JSON agar AJAX tidak 'hang'
+            return $this->response->setStatusCode(500)->setJSON([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    /**
+     * Proses Tambah Barang (AJAX)
      */
     public function save()
     {
         $rules = [
-            'kode_produk' => [
-                'rules'  => 'required|is_unique[produk.kode_produk]',
-                'errors' => [
-                    'required'  => 'Kode produk wajib diisi.',
-                    'is_unique' => 'Kode produk {value} sudah ada dalam sistem!'
-                ]
-            ],
-            'nama_produk' => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required'  => 'Nama produk wajib diisi.'
-                ]
-            ]
+            'kode_produk' => 'required|is_unique[produk.kode_produk]',
+            'nama_produk' => 'required',
+            'harga_beli'  => 'required|numeric',
+            'harga_jual'  => 'required|numeric',
+            'stok'        => 'required|numeric',
         ];
 
         if (!$this->validate($rules)) {
-            session()->setFlashdata('error', 'Gagal menyimpan! Periksa kembali inputan Anda.');
-            return redirect()->back()->withInput();
+            return $this->response->setJSON([
+                'status' => 'error',
+                'errors' => $this->validator->getErrors(),
+                'token'  => csrf_hash() // Kirim token baru jika gagal
+            ]);
         }
 
         $this->productModel->save([
@@ -67,18 +83,20 @@ class Product extends BaseController
             'stok'        => $this->request->getPost('stok'),
         ]);
 
-        return redirect()->to('/product')->with('success', 'Data produk berhasil ditambahkan.');
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Produk berhasil ditambahkan!',
+            'token'   => csrf_hash() // Kirim token baru untuk request selanjutnya
+        ]);
     }
 
     /**
-     * Proses Update Barang
+     * Proses Update Barang (AJAX)
      */
     public function update()
     {
-        // Ambil ID dari input hidden di modal edit
         $id = $this->request->getPost('id');
-
-        // Validasi input
+        
         $rules = [
             'nama_produk' => 'required',
             'harga_beli'  => 'required|numeric',
@@ -87,11 +105,14 @@ class Product extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error', 'Gagal update: Data tidak valid.');
+            return $this->response->setJSON([
+                'status' => 'error',
+                'errors' => $this->validator->getErrors(),
+                'token'  => csrf_hash()
+            ]);
         }
 
         $this->productModel->update($id, [
-            // Kode produk biasanya tidak diupdate karena jadi referensi nota/transaksi
             'nama_produk' => $this->request->getPost('nama_produk'),
             'kategori'    => $this->request->getPost('kategori'),
             'harga_beli'  => $this->request->getPost('harga_beli'),
@@ -99,21 +120,30 @@ class Product extends BaseController
             'stok'        => $this->request->getPost('stok'),
         ]);
 
-        return redirect()->to('/product')->with('success', 'Data produk berhasil diperbarui!');
+        return $this->response->setJSON([
+            'status'  => 'success',
+            'message' => 'Produk berhasil diperbarui!',
+            'token'   => csrf_hash()
+        ]);
     }
 
     /**
-     * Hapus Barang
+     * Hapus Barang (AJAX)
      */
     public function delete($id)
     {
-        $product = $this->productModel->find($id);
-        
-        if (!$product) {
-            return redirect()->to('/product')->with('error', 'Data tidak ditemukan.');
+        if ($this->productModel->delete($id)) {
+            return $this->response->setJSON([
+                'status'  => 'success',
+                'message' => 'Produk berhasil dihapus.',
+                'token'   => csrf_hash()
+            ]);
         }
 
-        $this->productModel->delete($id);
-        return redirect()->to('/product')->with('success', 'Data produk berhasil dihapus.');
+        return $this->response->setJSON([
+            'status'  => 'error',
+            'message' => 'Gagal menghapus data.',
+            'token'   => csrf_hash()
+        ], 400);
     }
 }

@@ -25,9 +25,7 @@
                         <h3>Rp <?= number_format($revenue_today ?? 0, 0, ',', '.') ?></h3>
                         <p>Pendapatan Hari Ini</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
+                    <div class="icon"><i class="fas fa-wallet"></i></div>
                     <a href="#" class="small-box-footer">Detail Transaksi <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -38,9 +36,7 @@
                         <h3><?= $total_orders_today ?? 0 ?></h3>
                         <p>Transaksi Hari Ini</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
+                    <div class="icon"><i class="fas fa-shopping-cart"></i></div>
                     <a href="#" class="small-box-footer">Lihat Penjualan <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -51,9 +47,7 @@
                         <h3><?= $total_products ?? 0 ?></h3>
                         <p>Total Produk</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-box"></i>
-                    </div>
+                    <div class="icon"><i class="fas fa-box"></i></div>
                     <a href="<?= base_url('product') ?>" class="small-box-footer" style="color: rgba(255,255,255,0.8) !important;">Kelola Produk <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -61,12 +55,10 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger shadow">
                     <div class="inner">
-                        <h3><?= $low_stock_count ?? 0 ?></h3>
+                        <h3 class="nav-low-stock-text"><?= $low_stock_count ?? 0 ?></h3>
                         <p>Stok Kritis (<= 5)</p>
                     </div>
-                    <div class="icon">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
                     <a href="#stok-rendah" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -122,7 +114,9 @@
                                             <span class="badge badge-danger"><?= $item['stok'] ?> Unit</span>
                                         </td>
                                         <td class="text-right pr-4">
-                                            <a href="<?= base_url('product') ?>" class="btn btn-xs btn-primary">Update</a>
+                                            <a href="<?= base_url('product?edit_id=' . $item['id']) ?>" class="btn btn-xs btn-primary shadow-sm">
+                                                <i class="fas fa-edit"></i> Update
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
@@ -137,7 +131,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -145,44 +138,66 @@
 
 <?= $this->section('script') ?>
 <script>
-    const dailyData = <?= json_encode($chart_data) ?>;
-    const monthlyData = <?= json_encode($chart_monthly) ?>;
+    // 1. AJAX UNTUK NAVBAR (Agar loading navbar cepat & asinkron)
+    function loadNavbarData() {
+        $.ajax({
+            url: "<?= base_url('dashboard/getNavbarData') ?>",
+            type: "GET",
+            dataType: "JSON",
+            success: function(response) {
+                // Update elemen di navbar (pastikan di layout/main.php elemen ini punya ID berikut)
+                $('#nav-user-name').text(response.nama_user);
+                if(response.low_stock_count > 0) {
+                    $('#nav-badge-stock').text(response.low_stock_count).show();
+                    $('.nav-low-stock-text').text(response.low_stock_count);
+                } else {
+                    $('#nav-badge-stock').hide();
+                }
+            }
+        });
+    }
 
-    // Chart Global Options untuk AdminLTE agar lebih halus
-    Chart.defaults.color = '#666';
-    Chart.defaults.font.family = "'Source Sans Pro', sans-serif";
+    $(document).ready(function() {
+        loadNavbarData(); // Panggil saat halaman siap
 
-    // --- Grafik Harian ---
-    new Chart(document.getElementById('dailyChart'), {
-        type: 'line',
-        data: {
-            labels: dailyData.map(item => item.tgl),
-            datasets: [{
-                label: 'Omzet',
-                data: dailyData.map(item => item.total),
-                borderColor: '#007bff',
-                backgroundColor: 'rgba(0, 123, 255, 0.1)',
-                fill: true,
-                tension: 0.3,
-                pointRadius: 4
-            }]
-        },
-        options: { maintainAspectRatio: false }
-    });
+        // 2. LOGIK GRAFIK
+        const dailyData = <?= json_encode($chart_data) ?>;
+        const monthlyData = <?= json_encode($chart_monthly) ?>;
 
-    // --- Grafik Bulanan ---
-    new Chart(document.getElementById('monthlyChart'), {
-        type: 'bar',
-        data: {
-            labels: monthlyData.map(item => item.bulan),
-            datasets: [{
-                label: 'Total Penjualan',
-                data: monthlyData.map(item => item.total),
-                backgroundColor: '#28a745',
-                borderRadius: 4
-            }]
-        },
-        options: { maintainAspectRatio: false }
+        Chart.defaults.color = '#666';
+        Chart.defaults.font.family = "'Source Sans Pro', sans-serif";
+
+        // Grafik Harian
+        new Chart(document.getElementById('dailyChart'), {
+            type: 'line',
+            data: {
+                labels: dailyData.map(item => item.tgl),
+                datasets: [{
+                    label: 'Omzet',
+                    data: dailyData.map(item => item.total),
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: { maintainAspectRatio: false }
+        });
+
+        // Grafik Bulanan
+        new Chart(document.getElementById('monthlyChart'), {
+            type: 'bar',
+            data: {
+                labels: monthlyData.map(item => item.bulan),
+                datasets: [{
+                    label: 'Total Penjualan',
+                    data: monthlyData.map(item => item.total),
+                    backgroundColor: '#28a745',
+                    borderRadius: 4
+                }]
+            },
+            options: { maintainAspectRatio: false }
+        });
     });
 </script>
 <?= $this->endSection() ?>

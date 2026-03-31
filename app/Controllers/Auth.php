@@ -35,7 +35,7 @@ class Auth extends BaseController
         return redirect()->to('/login')->with('msg', 'Registrasi Berhasil! Silakan Login.');
     }
 
-    // 4. Proses Verifikasi Login
+    // 4. Proses Verifikasi Login (DIREVISI)
     public function processLogin()
     {
         $userModel = new UserModel();
@@ -45,19 +45,23 @@ class Auth extends BaseController
         // Cari user berdasarkan email
         $user = $userModel->where('email', $email)->first();
 
-        // Jika user ada DAN password-nya cocok
+        // --- KODE REVISI DIMULAI DI SINI ---
         if ($user && password_verify($password, $user['password'])) {
-            // Set data ke dalam Session (tanda sudah login)
-            session()->set([
+            $sessionData = [
                 'user_id'   => $user['id'],
                 'username'  => $user['username'],
-                'logged_in' => true
-            ]);
+                'fullname'  => $user['fullname'], // Mengambil nama asli dari database
+                'role'      => $user['role'],     // Mengambil jabatan (admin/kasir)
+                'logged_in' => true,
+            ];
+            
+            session()->set($sessionData);
             return redirect()->to('/dashboard');
         } else {
             // Jika salah, balikkan ke login dengan pesan error
             return redirect()->back()->with('error', 'Email atau Password salah!');
         }
+        // --- KODE REVISI SELESAI ---
     }
 
     // 5. Keluar dari Aplikasi

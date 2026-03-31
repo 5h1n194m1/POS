@@ -2,7 +2,6 @@
 
 <?= $this->section('content') ?>
 <?php 
-    // Ambil data keranjang dari session agar saat refresh tetap muncul
     $session_cart = session()->get('cart') ?? [];
     $grandTotal = 0;
 ?>
@@ -35,13 +34,11 @@
         color: #007bff;
     }
     
-    /* Input Group Fix */
     .input-group-lg { display: flex !important; }
     .input-group-lg > .form-control { border-radius: 0 !important; height: 50px !important; }
     .input-group-lg > .input-group-prepend > .input-group-text { border-radius: 0.5rem 0 0 0.5rem !important; background: #fff; }
     .input-group-lg > .input-group-append > .btn { border-radius: 0 0.5rem 0.5rem 0 !important; }
 
-    /* GRID PRODUK PREVIEW */
     .product-grid { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 15px; }
     .product-card { flex: 0 0 130px; background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: 0.2s; }
     .product-card:hover { border-color: #007bff; background: #f8f9fa; transform: translateY(-2px); }
@@ -128,8 +125,10 @@
 
         <div class="card shadow-sm border-primary">
             <div class="card-body">
-                <form action="<?= base_url('kasir/checkout') ?>" method="POST" id="form-checkout">
+                <form id="form-checkout">
                     <?= csrf_field() ?>
+                    <input type="hidden" name="total" id="hidden-total" value="<?= $grandTotal ?>">
+                    
                     <div class="form-group mb-3">
                         <label class="small text-muted font-weight-bold">BAYAR TUNAI (F8)</label>
                         <input type="number" name="bayar" id="input-bayar" class="form-control form-control-lg text-bold text-primary text-right" placeholder="0" required style="font-size: 2rem; height: 80px;">
@@ -137,6 +136,7 @@
                     
                     <div class="p-3 bg-light rounded d-flex justify-content-between align-items-center mb-4 border">
                         <span class="font-weight-bold small text-muted">KEMBALIAN</span>
+                        <input type="hidden" name="kembalian" id="hidden-kembalian" value="0">
                         <h3 id="label-kembalian" class="text-success font-weight-bold mb-0">Rp 0</h3>
                     </div>
 
@@ -161,7 +161,6 @@
         const inputQty = $('#input-qty');
         const inputBayar = $('#input-bayar');
         
-        // PENTING: Inisialisasi total dari PHP agar sinkron saat refresh
         let currentTotal = <?= $grandTotal ?>;
 
         searchInput.focus();
@@ -207,23 +206,7 @@
             inputQty.focus().select(); 
         });
 
-        // 2. Barcode & Enter Logic
-        searchInput.on('keypress', function(e) {
-            if (e.which == 13) {
-                e.preventDefault();
-                const keyword = $(this).val().toLowerCase();
-                const exactMatch = products.find(p => p.kode_produk.toLowerCase() === keyword);
-                
-                if (exactMatch) {
-                    productIdInput.val(exactMatch.id);
-                    addToCart(exactMatch.id, inputQty.val());
-                } else if (productIdInput.val() !== '') {
-                    inputQty.focus().select();
-                }
-            }
-        });
-
-        // 3. Ajax Keranjang
+        // 2. Add To Cart Ajax
         function addToCart(productId, qty) {
             if(!productId) {
                 Swal.fire('Info', 'Pilih barang terlebih dahulu!', 'warning');
@@ -263,10 +246,12 @@
             addToCart($(this).data('id'), 1);
         });
 
-        // 4. Update UI
+        // 3. Update UI Table
         function updateTable(cart, total) {
             let html = '';
             currentTotal = total;
+            $('#hidden-total').val(total); // Update hidden input total
+
             if (Object.keys(cart).length > 0) {
                 $.each(cart, function(id, item) {
                     html += `<tr>
@@ -298,10 +283,60 @@
         function calculateReturn() {
             const bayar = parseFloat(inputBayar.val()) || 0;
             const kembalian = bayar - currentTotal;
-            $('#label-kembalian').text('Rp ' + (kembalian >= 0 ? kembalian.toLocaleString('id-ID') : 0));
+            const displayKembalian = kembalian >= 0 ? kembalian : 0;
+            $('#label-kembalian').text('Rp ' + displayKembalian.toLocaleString('id-ID'));
+            $('#hidden-kembalian').val(displayKembalian); // Update hidden input kembalian
         }
         
         inputBayar.on('input', calculateReturn);
+
+        // ==========================================
+        // 4. LOGIKA AJAX CHECKOUT & CETAK (TUGAS 2)
+        // ==========================================
+        $('#form-checkout').on('submit', function(e) {
+            e.preventDefault();
+            
+            const bayar = parseFloat(inputBayar.val()) || 0;
+            if (bayar < currentTotal) {
+                Swal.fire('Oops!', 'Uang bayar kurang!', 'error');
+                return;
+            }
+
+            const formData = $(this).serialize();
+
+            $.ajax({
+                url: "<?= base_url('penjualan/save') ?>", // Arahkan ke Controller Penjualan
+                type: "POST",
+                data: formData,
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire({
+                            title: "Transaksi Berhasil!",
+                            text: "Apakah Anda ingin mencetak struk?",
+                            icon: "success",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#aaa",
+                            confirmButtonText: "<i class='fas fa-print'></i> Ya, Cetak",
+                            cancelButtonText: "Tidak, Selesai",
+                            reverseButtons: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Buka window baru untuk print nota menggunakan ID yang dikirim controller
+                                var printUrl = "<?= base_url('kasir/print_nota') ?>/" + response.id;
+                                window.open(printUrl, '_blank', 'width=400,height=600');
+                                location.reload(); 
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    } else {
+                        Swal.fire('Error', response.msg, 'error');
+                    }
+                }
+            });
+        });
 
         $(document).on('keydown', function(e) {
             if (e.key === 'F2') { e.preventDefault(); searchInput.focus(); }
