@@ -21,20 +21,14 @@ class Kasir extends BaseController
         $productModel = new ProductModel();
         $id = $this->request->getPost('product_id');
         $qty = (int)$this->request->getPost('qty');
-
         $product = $productModel->find($id);
 
         if ($product) {
-            // Cek Stok
             if ($product['stok'] < $qty) {
-                return $this->response->setJSON([
-                    'status' => 'error', 
-                    'message' => 'Stok tidak mencukupi! Sisa: ' . $product['stok']
-                ]);
+                return $this->response->setJSON(['status' => 'error', 'message' => 'Stok tidak mencukupi!']);
             }
 
             $cart = session()->get('cart') ?? [];
-            
             if (isset($cart[$id])) {
                 $cart[$id]['qty'] += $qty;
                 $cart[$id]['subtotal'] = $cart[$id]['qty'] * $cart[$id]['price'];
@@ -49,20 +43,32 @@ class Kasir extends BaseController
             }
 
             session()->set('cart', $cart);
-
-            // Hitung Grand Total untuk dikirim balik ke AJAX
             $grandTotal = array_sum(array_column($cart, 'subtotal'));
 
             return $this->response->setJSON([
                 'status' => 'success',
-                'message' => 'Produk berhasil ditambah',
                 'cart'   => $cart,
-                'grandTotal' => $grandTotal,
-                'formattedTotal' => number_format($grandTotal, 0, ',', '.')
+                'grandTotal' => $grandTotal // Nama variabel disamakan dengan JS
             ]);
         }
-
         return $this->response->setJSON(['status' => 'error', 'message' => 'Produk tidak ditemukan']);
+    }
+
+    public function remove($id)
+    {
+        $cart = session()->get('cart') ?? [];
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->set('cart', $cart);
+        }
+
+        $total = !empty($cart) ? array_sum(array_column($cart, 'subtotal')) : 0;
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'cart'   => $cart,
+            'total'  => $total
+        ]);
     }
 
     public function clearCart()
@@ -71,31 +77,14 @@ class Kasir extends BaseController
         return redirect()->to('/kasir');
     }
 
-    public function remove($id)
-    {
-        $cart = session()->get('cart');
-        if (isset($cart[$id])) {
-            unset($cart[$id]);
-            session()->set('cart', $cart);
-        }
-        return redirect()->to('/kasir');
-    }
-
     public function checkout()
     {
         $cart = session()->get('cart');
         $bayar = $this->request->getPost('bayar');
         
-        if (empty($cart)) {
-            return redirect()->to('/kasir')->with('error', 'Keranjang masih kosong!');
-        }
+        if (empty($cart)) return redirect()->to('/kasir');
 
         $grandTotal = array_sum(array_column($cart, 'subtotal'));
-
-        if ($bayar < $grandTotal) {
-            return redirect()->back()->with('error', 'Uang pembayaran tidak mencukupi!');
-        }
-
         $db = \Config\Database::connect();
         $productModel = new ProductModel();
 
@@ -118,7 +107,6 @@ class Kasir extends BaseController
                 'subtotal'     => $item['subtotal']
             ]);
 
-            // Update Stok
             $produk = $productModel->find($id);
             $productModel->update($id, ['stok' => $produk['stok'] - $item['qty']]);
         }
@@ -129,7 +117,9 @@ class Kasir extends BaseController
             return redirect()->back()->with('error', 'Gagal menyimpan transaksi.');
         }
 
-        session()->remove('cart');
-        return redirect()->to('/kasir')->with('success', 'Transaksi Berhasil!')->with('print_id', $penjualan_id);
+        session()->remove('cart'); // PEMBERSIHAN FINAL
+        return redirect()->to('/kasir')
+                        ->with('success', 'Transaksi Berhasil!')
+                        ->with('print_id', $penjualan_id);
     }
 }

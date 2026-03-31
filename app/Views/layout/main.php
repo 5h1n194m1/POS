@@ -100,27 +100,23 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
-        // Inisialisasi Select2 secara global untuk semua class .select2
         $('.select2').select2({
             theme: 'bootstrap4',
             placeholder: "-- Pilih --",
             allowClear: true
         });
 
-        // Penyelamat Modal BS5 di Environment BS4
-        $(document).on('click', '[data-bs-toggle="modal"]', function() {
-            $($(this).data('bs-target')).modal('show');
-        });
-        $(document).on('click', '[data-bs-dismiss="modal"]', function() {
-            $(this).closest('.modal').modal('hide');
+        // Penyelamat modal (Support data-toggle dan data-bs-toggle)
+        $(document).on('click', '[data-toggle="modal"], [data-bs-toggle="modal"]', function(e) {
+            e.preventDefault();
+            var target = $(this).data('target') || $(this).data('bs-target');
+            $(target).modal('show');
         });
     });
 </script>

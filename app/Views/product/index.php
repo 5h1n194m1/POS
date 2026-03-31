@@ -21,7 +21,6 @@
                         <th class="pl-4" width="15%">Kode</th>
                         <th width="25%">Nama Produk</th>
                         <th width="15%">Kategori</th>
-                        <th width="15%">Harga Beli</th>
                         <th width="15%">Harga Jual</th>
                         <th class="text-center" width="10%">Stok</th>
                         <th class="text-center pr-4" width="10%">Aksi</th>
@@ -36,7 +35,6 @@
                                 </td>
                                 <td class="font-weight-bold text-dark"><?= esc($p['nama_produk']) ?></td>
                                 <td><span class="text-muted small"><?= esc($p['kategori'] ?: '-') ?></span></td>
-                                <td>Rp <?= number_format($p['harga_beli'], 0, ',', '.') ?></td>
                                 <td class="text-primary font-weight-bold">Rp <?= number_format($p['harga_jual'], 0, ',', '.') ?></td>
                                 <td class="text-center">
                                     <?php if ($p['stok'] <= 0): ?>
@@ -60,8 +58,7 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <a href="<?= base_url('product/delete/' . $p['id']) ?>" 
-                                           class="btn btn-sm btn-outline-danger" 
-                                           onclick="return confirm('Hapus produk ini?')">
+                                           class="btn btn-sm btn-outline-danger btn-delete">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
@@ -70,7 +67,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="7" class="text-center py-5 text-muted">
+                            <td colspan="6" class="text-center py-5 text-muted">
                                 <i class="fas fa-box-open fs-1 d-block mb-2 opacity-25"></i>
                                 Belum ada data produk.
                             </td>
@@ -82,101 +79,101 @@
     </div>
 </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content border-0 shadow-lg">
-            <form action="<?= base_url('product/save') ?>" method="post">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form action="<?= base_url('product/save') ?>" method="POST">
                 <?= csrf_field() ?>
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title font-weight-bold"><i class="fas fa-plus-circle mr-2"></i>Tambah Barang Baru</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title font-weight-bold">Tambah Produk Baru</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-                <div class="modal-body p-4">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Kode Produk</label>
-                            <input type="text" name="kode_produk" id="add-kode" class="form-control" value="<?= old('kode_produk') ?>" required>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kode Produk</label>
+                                <input type="text" name="kode_produk" id="add-kode" class="form-control" placeholder="Contoh: BRG001" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Produk</label>
+                                <input type="text" name="nama_produk" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori</label>
+                                <input type="text" name="kategori" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Kategori</label>
-                            <input type="text" name="kategori" class="form-control" value="<?= old('kategori') ?>">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Harga Beli</label>
+                                <input type="number" name="harga_beli" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Harga Jual</label>
+                                <input type="number" name="harga_jual" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Stok Awal</label>
+                                <input type="number" name="stok" class="form-control" required min="0">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="small font-weight-bold">Nama Produk</label>
-                        <input type="text" name="nama_produk" class="form-control" value="<?= old('nama_produk') ?>" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Harga Beli</label>
-                            <input type="number" name="harga_beli" class="form-control" value="<?= old('harga_beli') ?>" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Harga Jual</label>
-                            <input type="number" name="harga_jual" class="form-control" value="<?= old('harga_jual') ?>" required>
-                        </div>
-                    </div>
-                    <div class="form-group mb-0">
-                        <label class="small font-weight-bold">Stok Awal</label>
-                        <input type="number" name="stok" class="form-control" value="<?= old('stok', 0) ?>" required>
                     </div>
                 </div>
-                <div class="modal-footer bg-light border-0">
-                    <button type="button" class="btn btn-secondary px-4" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary px-4 shadow-sm">Simpan Inventaris</button>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary px-4">Simpan Produk</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content border-0 shadow-lg">
-            <form action="<?= base_url('product/update') ?>" method="post">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form action="<?= base_url('product/update') ?>" method="POST">
                 <?= csrf_field() ?>
                 <input type="hidden" name="id" id="edit-id">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title font-weight-bold"><i class="fas fa-edit mr-2"></i>Edit Data Barang</h5>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title font-weight-bold">Edit Produk</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-                <div class="modal-body p-4">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Kode Produk</label>
-                            <input type="text" name="kode_produk" id="edit-kode" class="form-control" required>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Kode Produk</label>
+                                <input type="text" name="kode_produk" id="edit-kode" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Produk</label>
+                                <input type="text" name="nama_produk" id="edit-nama" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori</label>
+                                <input type="text" name="kategori" id="edit-kategori" class="form-control">
+                            </div>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Kategori</label>
-                            <input type="text" name="kategori" id="edit-kategori" class="form-control">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Harga Beli</label>
+                                <input type="number" name="harga_beli" id="edit-beli" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Harga Jual</label>
+                                <input type="number" name="harga_jual" id="edit-jual" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Stok</label>
+                                <input type="number" name="stok" id="edit-stok" class="form-control" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="small font-weight-bold">Nama Produk</label>
-                        <input type="text" name="nama_produk" id="edit-nama" class="form-control" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Harga Beli</label>
-                            <input type="number" name="harga_beli" id="edit-beli" class="form-control" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="small font-weight-bold">Harga Jual</label>
-                            <input type="number" name="harga_jual" id="edit-jual" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group mb-0">
-                        <label class="small font-weight-bold">Stok</label>
-                        <input type="number" name="stok" id="edit-stok" class="form-control" required>
                     </div>
                 </div>
-                <div class="modal-footer bg-light border-0">
-                    <button type="button" class="btn btn-secondary px-4" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary px-4 shadow-sm">Simpan Perubahan</button>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-info px-4">Update Data</button>
                 </div>
             </form>
         </div>
@@ -188,17 +185,9 @@
 <?= $this->section('script') ?>
 <script>
     $(document).ready(function() {
-        
-        // Auto-fokus ke input Kode saat modal Tambah dibuka
-        $('#addModal').on('shown.bs.modal', function () {
-            $('#add-kode').focus();
-        });
-
-        // Fungsi Klik Tombol Edit
-        $('.btn-edit').on('click', function() {
+        // Event delegation untuk Edit
+        $(document).on('click', '.btn-edit', function() {
             const data = $(this).data();
-
-            // Masukkan ke input modal edit
             $('#edit-id').val(data.id);
             $('#edit-kode').val(data.kode);
             $('#edit-nama').val(data.nama);
@@ -206,36 +195,41 @@
             $('#edit-beli').val(data.beli);
             $('#edit-jual').val(data.jual);
             $('#edit-stok').val(data.stok);
-
-            // Tampilkan Modal Edit
             $('#editModal').modal('show');
         });
 
-        // Pop-up Error & Auto-Open Modal Tambah (jika ada error validasi)
-        <?php if (session()->getFlashdata('error')) : ?>
-            Swal.fire({
-                icon: 'warning',
-                title: 'Perhatian!',
-                text: '<?= session()->getFlashdata('error') ?>',
-                confirmButtonColor: '#007bff'
-            }).then(() => {
-                $('#addModal').modal('show');
-            });
-        <?php endif; ?>
+        // Fokus Kode saat tambah modal dibuka
+        $('#addModal').on('shown.bs.modal', function () {
+            $('#add-kode').focus();
+        });
 
-        // Pop-up Sukses (Toast style)
+        // SweetAlert Konfirmasi Hapus
+        $(document).on('click', '.btn-delete', function(e) {
+            e.preventDefault();
+            const url = $(this).attr('href');
+            Swal.fire({
+                title: 'Hapus Produk?',
+                text: "Data yang dihapus tidak bisa dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        });
+
+        // Alert sukses dari controller
         <?php if (session()->getFlashdata('success')) : ?>
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
-            Toast.fire({
-                icon: 'success',
-                title: '<?= session()->getFlashdata('success') ?>'
-            });
+            Swal.fire({ icon: 'success', title: 'Berhasil', text: '<?= session()->getFlashdata('success') ?>', timer: 2000, showConfirmButton: false });
+        <?php endif; ?>
+        
+        <?php if (session()->getFlashdata('error')) : ?>
+            Swal.fire({ icon: 'error', title: 'Gagal', text: '<?= session()->getFlashdata('error') ?>' });
         <?php endif; ?>
     });
 </script>

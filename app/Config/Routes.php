@@ -14,9 +14,13 @@ $routes->post('register', 'Auth::processRegister');
 $routes->get('logout', 'Auth::logout');
 $routes->get('product', 'Product::index');
 $routes->post('product/save', 'Product::save');
+$routes->post('product/update', 'Product::update');
 $routes->get('product/delete/(:num)', 'Product::delete/$1');
 $routes->get('kasir', 'Kasir::index');
 $routes->post('kasir/addToCart', 'Kasir::addToCart');
 $routes->get('kasir/remove/(:any)', 'Kasir::remove/$1');
 $routes->get('kasir/clear', 'Kasir::clearCart');
 $routes->post('kasir/checkout', 'Kasir::checkout');
+$routes->get('kasir/nota/(:num)', 'Kasir::nota/$1');
+
+$routes->setAutoRoute(true);
