@@ -47,12 +47,15 @@ DROP TABLE IF EXISTS `penjualan`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `penjualan` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
   `total_harga` decimal(10,2) DEFAULT NULL,
   `bayar` decimal(10,2) DEFAULT NULL,
   `kembalian` decimal(10,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  KEY `fk_penjualan_user` (`user_id`),
+  CONSTRAINT `fk_penjualan_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +64,7 @@ CREATE TABLE `penjualan` (
 
 LOCK TABLES `penjualan` WRITE;
 /*!40000 ALTER TABLE `penjualan` DISABLE KEYS */;
-INSERT INTO `penjualan` VALUES (1,20000.00,50000.00,30000.00,'2026-03-31 03:05:40');
+INSERT INTO `penjualan` VALUES (1,1,3000.00,5000.00,2000.00,'2026-03-31 08:56:31'),(2,1,3000.00,5000.00,2000.00,'2026-03-31 08:57:03'),(3,1,3000.00,5000.00,2000.00,'2026-03-31 09:01:17');
 /*!40000 ALTER TABLE `penjualan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,9 +78,9 @@ DROP TABLE IF EXISTS `penjualan_detail`;
 CREATE TABLE `penjualan_detail` (
   `id` int NOT NULL AUTO_INCREMENT,
   `penjualan_id` int DEFAULT NULL,
-  `produk_id` int DEFAULT NULL,
-  `qty` int DEFAULT NULL,
-  `subtotal` decimal(10,2) DEFAULT NULL,
+  `product_id` int NOT NULL,
+  `qty` int NOT NULL,
+  `subtotal` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -88,7 +91,7 @@ CREATE TABLE `penjualan_detail` (
 
 LOCK TABLES `penjualan_detail` WRITE;
 /*!40000 ALTER TABLE `penjualan_detail` DISABLE KEYS */;
-INSERT INTO `penjualan_detail` VALUES (1,1,1,1,20000.00);
+INSERT INTO `penjualan_detail` VALUES (1,3,2,1,3000);
 /*!40000 ALTER TABLE `penjualan_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +123,7 @@ CREATE TABLE `produk` (
 
 LOCK TABLES `produk` WRITE;
 /*!40000 ALTER TABLE `produk` DISABLE KEYS */;
-INSERT INTO `produk` VALUES (1,'Kopi','BRG001','Makanan',18000.00,20000.00,50,'2026-03-30 02:49:57','2026-03-31 03:18:39'),(2,'Indomie Goreng','BRG002','Makanan',2500.00,3000.00,50,'2026-03-30 14:00:32','2026-03-31 02:29:42'),(3,'Kopi Kapal Api','BRG003','Minuman',1500.00,2000.00,3,'2026-03-30 14:00:32','2026-03-30 14:07:44'),(6,'Lemari','BRG004','Barang',20000.00,240000.00,30,'2026-03-30 15:56:26','2026-03-31 03:31:02'),(7,'Sapu','BRG006','Rumah tangga',8000.00,12000.00,10,'2026-03-31 03:27:49','2026-03-31 03:27:49');
+INSERT INTO `produk` VALUES (1,'Kopi','BRG001','Makanan',18000.00,20000.00,49,'2026-03-30 02:49:57','2026-03-31 04:58:51'),(2,'Indomie Goreng','BRG002','Makanan',2500.00,3000.00,48,'2026-03-30 14:00:32','2026-03-31 16:01:17'),(3,'Kopi Kapal Api','BRG003','Minuman',1500.00,2000.00,0,'2026-03-30 14:00:32','2026-03-31 04:58:51'),(6,'Lemari','BRG004','Barang',20000.00,240000.00,30,'2026-03-30 15:56:26','2026-03-31 03:31:02'),(7,'Sapu','BRG006','Rumah tangga',8000.00,12000.00,9,'2026-03-31 03:27:49','2026-03-31 04:58:51');
 /*!40000 ALTER TABLE `produk` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,13 +137,18 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `role` enum('admin','kasir') DEFAULT 'kasir',
+  `status` enum('aktif','non-aktif') DEFAULT 'aktif',
+  `last_login` datetime DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +157,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Aditya','feyfeypor01@gmail.com','$2y$10$bGWGytwjchLULmBqVXcKGuIjPuQssNulH7LGR9evRwJwzHlIYCVHO','2026-03-30 02:22:30','2026-03-30 02:22:30');
+INSERT INTO `users` VALUES (1,'Aditya','Aditya Aditya','feyfeypor01@gmail.com','$2y$10$bGWGytwjchLULmBqVXcKGuIjPuQssNulH7LGR9evRwJwzHlIYCVHO','admin','aktif',NULL,1,'2026-03-30 02:22:30','2026-03-31 14:38:00'),(2,'admin_test','Administrator Utama','admin@test.com','$2y$10$8.uXG3nJ.sXW9GvjAInDDe9v7oGzC3/iXmB.6vM6GfK.vXzG.6vM6','admin','aktif',NULL,1,'2026-03-31 14:41:22','2026-03-31 14:41:22'),(3,'alex_kasir','Alex Sugiantoro','alex@test.com','$2y$10$8.uXG3nJ.sXW9GvjAInDDe9v7oGzC3/iXmB.6vM6GfK.vXzG.6vM6','kasir','aktif',NULL,1,'2026-03-31 14:41:22','2026-03-31 14:41:22');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -162,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-31 11:25:39
+-- Dump completed on 2026-03-31 16:51:45
