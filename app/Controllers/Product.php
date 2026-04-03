@@ -2,148 +2,158 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\ProductModel;
+use Config\Services;
 
 class Product extends BaseController
 {
     protected $productModel;
+    protected $validation;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
+        $this->validation   = Services::validation();
     }
 
-    /**
-     * Tampilkan Halaman Utama (Hanya Load View)
-     */
     public function index()
     {
-        if (!session()->get('logged_in')) {
-            return redirect()->to('/login');
+        return view('product/index', [
+            'title' => 'Data Produk',
+        ]);
+    }
+
+    public function listData()
+    {
+        $products = $this->productModel
+            ->orderBy('id', 'DESC')
+            ->findAll();
+
+        return $this->response->setJSON([
+            'data' => $products,
+        ]);
+    }
+
+    public function save()
+    {
+        $data = [
+            'nama_produk' => trim((string) $this->request->getPost('nama_produk')),
+            'kode_produk' => trim((string) $this->request->getPost('kode_produk')),
+            'kategori'    => trim((string) $this->request->getPost('kategori')),
+            'harga_beli'  => (float) $this->request->getPost('harga_beli'),
+            'harga_jual'  => (float) $this->request->getPost('harga_jual'),
+            'stok'        => (int) $this->request->getPost('stok'),
+        ];
+
+        $this->validation->setRules([
+            'nama_produk' => 'required|min_length[2]|max_length[255]',
+            'kode_produk' => 'permit_empty|max_length[50]',
+            'kategori'    => 'permit_empty|max_length[100]',
+            'harga_beli'  => 'required|decimal',
+            'harga_jual'  => 'required|decimal',
+            'stok'        => 'required|integer',
+        ]);
+
+        if (! $this->validation->run($data)) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Validasi gagal.',
+                'errors' => $this->validation->getErrors(),
+            ]);
+        }
+
+        if ($data['kode_produk'] !== '') {
+            $sameCode = $this->productModel->where('kode_produk', $data['kode_produk'])->first();
+            if ($sameCode) {
+                return $this->response->setStatusCode(422)->setJSON([
+                    'status' => 'error',
+                    'msg'    => 'Kode produk sudah digunakan.',
+                ]);
+            }
+        }
+
+        $this->productModel->insert($data);
+
+        return $this->response->setJSON([
+            'status' => 'success',
+            'msg'    => 'Produk berhasil ditambahkan.',
+        ]);
+    }
+
+    public function update()
+    {
+        $id = (int) $this->request->getPost('id');
+        $product = $this->productModel->find($id);
+
+        if (! $product) {
+            return $this->response->setStatusCode(404)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Produk tidak ditemukan.',
+            ]);
         }
 
         $data = [
-            'title' => 'Manajemen Stok Produk',
-            // Kita tidak mengirim data 'products' di sini lagi, 
-            // karena data akan ditarik via AJAX nanti.
+            'nama_produk' => trim((string) $this->request->getPost('nama_produk')),
+            'kode_produk' => trim((string) $this->request->getPost('kode_produk')),
+            'kategori'    => trim((string) $this->request->getPost('kategori')),
+            'harga_beli'  => (float) $this->request->getPost('harga_beli'),
+            'harga_jual'  => (float) $this->request->getPost('harga_jual'),
+            'stok'        => (int) $this->request->getPost('stok'),
         ];
 
-        return view('product/index', $data);
-    }
-
-    /**
-     * Ambil Data JSON untuk Tabel (Dijalankan via AJAX)
-     */
-    public function listData()
-    {
-        try {
-            $products = $this->productModel->orderBy('id', 'DESC')->findAll();
-            
-            return $this->response->setJSON([
-                'status' => 'success',
-                'data'   => $products
-            ]);
-        } catch (\Exception $e) {
-            // Jika ada error, kirimkan pesan error dalam format JSON agar AJAX tidak 'hang'
-            return $this->response->setStatusCode(500)->setJSON([
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ]);
-        }
-    }
-
-    /**
-     * Proses Tambah Barang (AJAX)
-     */
-    public function save()
-    {
-        $rules = [
-            'kode_produk' => 'required|is_unique[produk.kode_produk]',
-            'nama_produk' => 'required',
-            'harga_beli'  => 'required|numeric',
-            'harga_jual'  => 'required|numeric',
-            'stok'        => 'required|numeric',
-        ];
-
-        if (!$this->validate($rules)) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'errors' => $this->validator->getErrors(),
-                'token'  => csrf_hash() // Kirim token baru jika gagal
-            ]);
-        }
-
-        $this->productModel->save([
-            'kode_produk' => $this->request->getPost('kode_produk'),
-            'nama_produk' => $this->request->getPost('nama_produk'),
-            'kategori'    => $this->request->getPost('kategori'),
-            'harga_beli'  => $this->request->getPost('harga_beli'),
-            'harga_jual'  => $this->request->getPost('harga_jual'),
-            'stok'        => $this->request->getPost('stok'),
+        $this->validation->setRules([
+            'nama_produk' => 'required|min_length[2]|max_length[255]',
+            'kode_produk' => 'permit_empty|max_length[50]',
+            'kategori'    => 'permit_empty|max_length[100]',
+            'harga_beli'  => 'required|decimal',
+            'harga_jual'  => 'required|decimal',
+            'stok'        => 'required|integer',
         ]);
+
+        if (! $this->validation->run($data)) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Validasi gagal.',
+                'errors' => $this->validation->getErrors(),
+            ]);
+        }
+
+        if ($data['kode_produk'] !== '') {
+            $sameCode = $this->productModel
+                ->where('kode_produk', $data['kode_produk'])
+                ->where('id !=', $id)
+                ->first();
+
+            if ($sameCode) {
+                return $this->response->setStatusCode(422)->setJSON([
+                    'status' => 'error',
+                    'msg'    => 'Kode produk sudah digunakan.',
+                ]);
+            }
+        }
+
+        $this->productModel->update($id, $data);
 
         return $this->response->setJSON([
-            'status'  => 'success',
-            'message' => 'Produk berhasil ditambahkan!',
-            'token'   => csrf_hash() // Kirim token baru untuk request selanjutnya
+            'status' => 'success',
+            'msg'    => 'Produk berhasil diperbarui.',
         ]);
     }
 
-    /**
-     * Proses Update Barang (AJAX)
-     */
-    public function update()
-    {
-        $id = $this->request->getPost('id');
-        
-        $rules = [
-            'nama_produk' => 'required',
-            'harga_beli'  => 'required|numeric',
-            'harga_jual'  => 'required|numeric',
-            'stok'        => 'required|numeric',
-        ];
-
-        if (!$this->validate($rules)) {
-            return $this->response->setJSON([
-                'status' => 'error',
-                'errors' => $this->validator->getErrors(),
-                'token'  => csrf_hash()
-            ]);
-        }
-
-        $this->productModel->update($id, [
-            'nama_produk' => $this->request->getPost('nama_produk'),
-            'kategori'    => $this->request->getPost('kategori'),
-            'harga_beli'  => $this->request->getPost('harga_beli'),
-            'harga_jual'  => $this->request->getPost('harga_jual'),
-            'stok'        => $this->request->getPost('stok'),
-        ]);
-
-        return $this->response->setJSON([
-            'status'  => 'success',
-            'message' => 'Produk berhasil diperbarui!',
-            'token'   => csrf_hash()
-        ]);
-    }
-
-    /**
-     * Hapus Barang (AJAX)
-     */
     public function delete($id)
     {
-        if ($this->productModel->delete($id)) {
-            return $this->response->setJSON([
-                'status'  => 'success',
-                'message' => 'Produk berhasil dihapus.',
-                'token'   => csrf_hash()
-            ]);
+        $id = (int) $id;
+        $product = $this->productModel->find($id);
+
+        if (! $product) {
+            return redirect()->back()->with('error', 'Produk tidak ditemukan.');
         }
 
-        return $this->response->setJSON([
-            'status'  => 'error',
-            'message' => 'Gagal menghapus data.',
-            'token'   => csrf_hash()
-        ], 400);
+        try {
+            $this->productModel->delete($id);
+            return redirect()->to('/product')->with('msg', 'Produk berhasil dihapus.');
+        } catch (\Throwable $e) {
+            return redirect()->to('/product')->with('error', 'Produk tidak bisa dihapus karena sudah dipakai transaksi.');
+        }
     }
 }

@@ -2,85 +2,100 @@
 
 namespace App\Controllers;
 
+use Config\Database;
+
 class Dashboard extends BaseController
 {
-    public function index()
+    protected $db;
+
+    public function __construct()
     {
-        // 1. Proteksi Login
-        if (!session()->get('logged_in')) {
-            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        $db = \Config\Database::connect();
-        $today = date('Y-m-d');
-
-        // 2. Persiapan Data untuk View
-        $data = [
-            'title'              => 'Dashboard POS | Management System',
-            'user_name'          => session()->get('nama_user'),
-            
-            // Statistik (Tetap di-load awal agar angka utama langsung muncul)
-            'total_products'     => $db->table('produk')->countAll(),
-            'low_stock_count'    => $db->table('produk')->where('stok <=', 5)->countAllResults(),
-            
-            // Ambil 5 barang dengan stok terendah
-            'low_stock_items'    => $db->table('produk')
-                                      ->where('stok <=', 5)
-                                      ->orderBy('stok', 'ASC')
-                                      ->limit(5)
-                                      ->get()->getResultArray(),
-            
-            // Omzet & Transaksi Hari Ini
-            'revenue_today'      => $db->table('penjualan')
-                                      ->selectSum('total_harga')
-                                      ->where('DATE(created_at)', $today)
-                                      ->get()->getRow()->total_harga ?? 0,
-                                      
-            'total_orders_today' => $db->table('penjualan')
-                                      ->where('DATE(created_at)', $today)
-                                      ->countAllResults(),
-
-            // Data Grafik
-            'chart_data'         => $this->_getSalesChartData($db),
-            'chart_monthly'      => $this->_getMonthlySalesData($db),
-        ];
-
-        return view('dashboard/index', $data);
+        $this->db = Database::connect();
     }
 
-    /**
-     * Endpoint API untuk Navbar (AJAX)
-     * Untuk mempercepat loading navbar di semua halaman
-     */
-    public function getNavbarData()
+    public function index()
     {
-        $db = \Config\Database::connect();
-        $low_stock = $db->table('produk')->where('stok <=', 5)->countAllResults();
+        $today = date('Y-m-d');
 
-        return $this->response->setJSON([
-            'nama_user'       => session()->get('nama_user'),
-            'low_stock_count' => $low_stock,
-            'server_time'     => date('H:i:s')
+        $revenueToday = $this->db->table('penjualan')
+            ->selectSum('total_harga')
+            ->where('DATE(created_at)', $today)
+            ->get()
+            ->getRowArray();
+
+        $ordersToday = $this->db->table('penjualan')
+            ->where('DATE(created_at)', $today)
+            ->countAllResults();
+
+        $totalProducts = $this->db->table('produk')->countAllResults();
+
+        $lowStockItems = $this->db->table('produk')
+            ->where('stok <=', 5)
+            ->orderBy('stok', 'ASC')
+            ->limit(5)
+            ->get()
+            ->getResultArray();
+
+        $dailyRows = $this->db->table('penjualan')
+            ->select("DATE(created_at) as tgl, COALESCE(SUM(total_harga), 0) as total", false)
+            ->where('created_at >=', date('Y-m-d 00:00:00', strtotime('-6 days')))
+            ->groupBy('DATE(created_at)')
+            ->orderBy('DATE(created_at)', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        $recentTransactions = $this->db->table('penjualan p')
+            ->select('p.id, p.created_at, p.total_harga, u.fullname')
+            ->join('users u', 'u.id = p.user_id', 'left')
+            ->orderBy('p.created_at', 'DESC')
+            ->limit(5)
+            ->get()
+            ->getResultArray();
+
+        return view('dashboard/index', [
+            'title'               => 'Dashboard',
+            'revenue_today'       => (float) ($revenueToday['total_harga'] ?? 0),
+            'total_orders_today'  => $ordersToday,
+            'total_products'      => $totalProducts,
+            'low_stock_count'     => count($lowStockItems),
+            'low_stock_items'     => $lowStockItems,
+            'chart_data'          => $this->fillDailySeries($dailyRows),
+            'recent_transactions' => $recentTransactions,
         ]);
     }
 
-    private function _getSalesChartData($db)
+    public function getNavbarData()
     {
-        return $db->table('penjualan')
-                  ->select("DATE(created_at) as tgl, SUM(total_harga) as total")
-                  ->where('created_at >=', date('Y-m-d', strtotime('-7 days')))
-                  ->groupBy('tgl')
-                  ->orderBy('tgl', 'ASC')
-                  ->get()->getResultArray();
+        $lowStockCount = $this->db->table('produk')
+            ->where('stok <=', 5)
+            ->countAllResults();
+
+        return $this->response->setJSON([
+            'nama_user'       => session()->get('fullname') ?: 'User',
+            'low_stock_count' => $lowStockCount,
+        ]);
     }
 
-    private function _getMonthlySalesData($db)
+    private function fillDailySeries(array $rows): array
     {
-        return $db->table('penjualan')
-              ->select("DATE_FORMAT(created_at, '%Y-%m') as periode, DATE_FORMAT(created_at, '%M %Y') as bulan, SUM(total_harga) as total")
-              ->where('created_at >=', date('Y-m-d', strtotime('-12 months')))
-              ->groupBy('periode, bulan') // Kelompokkan berdasarkan periode juga
-              ->orderBy('periode', 'ASC')   // Urutkan berdasarkan string YYYY-MM agar urutan bulannya benar
-              ->get()->getResultArray();
+        $mapped = [];
+        foreach ($rows as $row) {
+            $mapped[$row['tgl']] = (float) $row['total'];
+        }
+
+        $result  = [];
+        $current = strtotime('-6 days');
+        $end     = strtotime(date('Y-m-d'));
+
+        while ($current <= $end) {
+            $date = date('Y-m-d', $current);
+            $result[] = [
+                'tgl'   => date('d M', $current),
+                'total' => $mapped[$date] ?? 0,
+            ];
+            $current = strtotime('+1 day', $current);
+        }
+
+        return $result;
     }
 }

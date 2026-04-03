@@ -5,105 +5,165 @@ namespace App\Controllers;
 use App\Models\PenjualanModel;
 use App\Models\PenjualanDetailModel;
 use App\Models\ProductModel;
+use Config\Database;
 
 class Penjualan extends BaseController
 {
     protected $penjualanModel;
     protected $detailModel;
     protected $productModel;
+    protected $db;
 
     public function __construct()
     {
         $this->penjualanModel = new PenjualanModel();
         $this->detailModel    = new PenjualanDetailModel();
         $this->productModel   = new ProductModel();
+        $this->db             = Database::connect();
     }
 
-    /**
-     * Proses Simpan Transaksi
-     */
     public function save()
     {
-        $cart = session()->get('cart');
-        if (!$cart) {
-            return $this->response->setJSON(['status' => 'error', 'msg' => 'Keranjang kosong!']);
+        $cart = session()->get('cart') ?? [];
+
+        if (empty($cart)) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'msg'    => 'Keranjang kosong.',
+            ]);
         }
 
+        $grandTotal = 0;
+        foreach ($cart as $item) {
+            $grandTotal += (float) $item['subtotal'];
+        }
+
+        $bayar = (float) $this->request->getPost('bayar');
+        if ($bayar < $grandTotal) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Nominal bayar kurang dari total transaksi.',
+            ]);
+        }
+
+        $kembalian = $bayar - $grandTotal;
+        $createdAt = date('Y-m-d H:i:s');
+
+        $this->db->transBegin();
+
         try {
-            // 1. Simpan Header Penjualan
             $dataPenjualan = [
                 'user_id'     => session()->get('user_id'),
-                'total_harga' => $this->request->getPost('total'),
-                'bayar'       => $this->request->getPost('bayar'),
-                'kembalian'   => $this->request->getPost('kembalian'),
-                'created_at'  => date('Y-m-d H:i:s'),
+                'total_harga' => $grandTotal,
+                'bayar'       => $bayar,
+                'kembalian'   => $kembalian,
+                'created_at'  => $createdAt,
             ];
 
-            if (!$this->penjualanModel->insert($dataPenjualan)) {
-                throw new \Exception("Gagal simpan data penjualan utama.");
+            if (! $this->penjualanModel->insert($dataPenjualan)) {
+                throw new \Exception('Gagal menyimpan header transaksi.');
             }
 
-            $penjualan_id = $this->penjualanModel->getInsertID();
+            $penjualanId = $this->penjualanModel->getInsertID();
 
-            // 2. Simpan Detail & Kurangi Stok
             foreach ($cart as $id => $item) {
-                // Simpan ke tabel penjualan_detail
-                $this->detailModel->insert([
-                    'penjualan_id' => $penjualan_id,
+                $product = $this->productModel->find($id);
+
+                if (! $product) {
+                    throw new \Exception('Produk dengan ID ' . $id . ' tidak ditemukan.');
+                }
+
+                if ((int) $product['stok'] < (int) $item['qty']) {
+                    throw new \Exception('Stok produk "' . $product['nama_produk'] . '" tidak mencukupi.');
+                }
+
+                $insertDetail = $this->detailModel->insert([
+                    'penjualan_id' => $penjualanId,
                     'product_id'   => $id,
                     'qty'          => $item['qty'],
-                    'subtotal'     => $item['subtotal']
+                    'subtotal'     => $item['subtotal'],
                 ]);
 
-                // Update stok di tabel 'produk'
-                // Menggunakan false pada parameter ketiga set() agar query 'stok - x' tidak di-escape sebagai string
-                $this->productModel->where('id', $id)
-                                   ->set('stok', "stok - {$item['qty']}", false)
-                                   ->update();
+                if (! $insertDetail) {
+                    throw new \Exception('Gagal menyimpan detail transaksi.');
+                }
+
+                $updated = $this->productModel
+                    ->where('id', $id)
+                    ->set('stok', 'stok - ' . (int) $item['qty'], false)
+                    ->update();
+
+                if (! $updated) {
+                    throw new \Exception('Gagal mengurangi stok produk "' . $product['nama_produk'] . '".');
+                }
             }
 
-            // 3. Hapus Keranjang setelah sukses
+            if ($this->db->transStatus() === false) {
+                throw new \Exception('Transaksi database gagal.');
+            }
+
+            $this->db->transCommit();
             session()->remove('cart');
 
             return $this->response->setJSON([
-                'status' => 'success', 
-                'id'     => $penjualan_id
+                'status'      => 'success',
+                'msg'         => 'Transaksi berhasil disimpan.',
+                'id'          => $penjualanId,
+                'invoice_no'  => $this->formatInvoiceNo($penjualanId, $createdAt),
+                'print_url_80'=> base_url('penjualan/print_nota/' . $penjualanId . '?paper=80'),
+                'print_url_58'=> base_url('penjualan/print_nota/' . $penjualanId . '?paper=58'),
             ]);
+        } catch (\Throwable $e) {
+            $this->db->transRollback();
 
-        } catch (\Exception $e) {
-            // Jika error, kirim pesan error asli ke browser
             return $this->response->setStatusCode(500)->setJSON([
                 'status' => 'error',
-                'msg'    => $e->getMessage()
+                'msg'    => $e->getMessage(),
             ]);
         }
     }
 
-    /**
-     * Fungsi Print Nota
-     */
     public function print_nota($id)
     {
-        $penjualan = $this->penjualanModel->find($id);
+        $paper = $this->normalizePaper((string) $this->request->getGet('paper'));
 
-        if (!$penjualan) {
-            return "Data transaksi tidak ditemukan.";
+        $builder = $this->db->table('penjualan p');
+        $builder->select('p.*, u.fullname, u.username');
+        $builder->join('users u', 'u.id = p.user_id', 'left');
+        $builder->where('p.id', $id);
+        $penjualan = $builder->get()->getRowArray();
+
+        if (! $penjualan) {
+            return 'Data transaksi tidak ditemukan.';
         }
 
-        $db = \Config\Database::connect();
-        
-        // Join ke tabel 'produk' sesuai dengan ProductModel Anda
-        $details = $db->table('penjualan_detail')
-                      ->join('produk', 'produk.id = penjualan_detail.product_id')
-                      ->where('penjualan_id', $id)
-                      ->get()
-                      ->getResultArray();
+        $details = $this->db->table('penjualan_detail d')
+            ->select('d.qty, d.subtotal, produk.nama_produk, produk.kode_produk, produk.harga_jual')
+            ->join('produk', 'produk.id = d.product_id')
+            ->where('d.penjualan_id', $id)
+            ->get()
+            ->getResultArray();
 
-        $data = [
-            'penjualan' => $penjualan,
-            'details'   => $details
-        ];
+        return view('kasir/nota', [
+            'penjualan'   => $penjualan,
+            'details'     => $details,
+            'invoice_no'  => $this->formatInvoiceNo((int) $penjualan['id'], $penjualan['created_at']),
+            'paper_width' => $paper,
+            'store_name'  => 'POS SAYA',
+            'store_info'  => 'Sistem Informasi Kasir',
+            'store_addr'  => 'Jl. Contoh Alamat Toko',
+            'store_phone' => '08xxxxxxxxxx',
+        ]);
+    }
 
-        return view('kasir/nota', $data);
+    private function normalizePaper(string $paper): string
+    {
+        return in_array($paper, ['58', '80'], true) ? $paper : '80';
+    }
+
+    private function formatInvoiceNo(int $id, ?string $createdAt = null): string
+    {
+        $date = $createdAt ? date('Ymd', strtotime($createdAt)) : date('Ymd');
+        return 'INV-' . $date . '-' . str_pad((string) $id, 5, '0', STR_PAD_LEFT);
     }
 }

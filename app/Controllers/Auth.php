@@ -6,65 +6,108 @@ use App\Models\UserModel;
 
 class Auth extends BaseController
 {
-    // 1. Menampilkan Halaman Login
+    protected $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+    }
+
     public function login()
     {
+        if (session()->get('logged_in')) {
+            return redirect()->to('/dashboard');
+        }
+
         return view('auth/login');
     }
 
-    // 2. Menampilkan Halaman Register
     public function register()
     {
+        if (session()->get('logged_in')) {
+            return redirect()->to('/dashboard');
+        }
+
         return view('auth/register');
     }
 
-    // 3. Proses Pendaftaran User Baru
     public function processRegister()
     {
-        $userModel = new UserModel();
+        $rules = [
+            'fullname'         => 'required|min_length[3]|max_length[255]',
+            'username'         => 'required|min_length[3]|max_length[100]|is_unique[users.username]',
+            'email'            => 'required|valid_email|max_length[100]|is_unique[users.email]',
+            'password'         => 'required|min_length[6]',
+            'password_confirm' => 'required|matches[password]',
+        ];
 
-        // Ambil data dari form dan simpan ke database
-        $userModel->save([
-            'username' => $this->request->getPost('username'),
-            'email'    => $this->request->getPost('email'),
-            // Password di-hash (acak) agar aman, tidak teks biasa
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-        ]);
+        if (! $this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
 
-        // Setelah daftar, lempar ke halaman login
-        return redirect()->to('/login')->with('msg', 'Registrasi Berhasil! Silakan Login.');
+        $data = [
+            'username'  => trim($this->request->getPost('username')),
+            'fullname'  => trim($this->request->getPost('fullname')),
+            'email'     => trim($this->request->getPost('email')),
+            'password'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role'      => 'kasir',
+            'status'    => 'aktif',
+            'is_active' => 1,
+            'photo'     => null,
+        ];
+
+        if (! $this->userModel->insert($data)) {
+            return redirect()->back()->withInput()->with('error', 'Registrasi gagal disimpan.');
+        }
+
+        return redirect()->to('/login')->with('msg', 'Registrasi berhasil! Silakan login.');
     }
 
-    // 4. Proses Verifikasi Login (DIREVISI)
     public function processLogin()
     {
-        $userModel = new UserModel();
-        $email = $this->request->getPost('email');
+        $login    = trim($this->request->getPost('login'));
         $password = $this->request->getPost('password');
 
-        // Cari user berdasarkan email
-        $user = $userModel->where('email', $email)->first();
-
-        // --- KODE REVISI DIMULAI DI SINI ---
-        if ($user && password_verify($password, $user['password'])) {
-            $sessionData = [
-                'user_id'   => $user['id'],
-                'username'  => $user['username'],
-                'fullname'  => $user['fullname'], // Mengambil nama asli dari database
-                'role'      => $user['role'],     // Mengambil jabatan (admin/kasir)
-                'logged_in' => true,
-            ];
-            
-            session()->set($sessionData);
-            return redirect()->to('/dashboard');
-        } else {
-            // Jika salah, balikkan ke login dengan pesan error
-            return redirect()->back()->with('error', 'Email atau Password salah!');
+        if ($login === '' || $password === '') {
+            return redirect()->back()->withInput()->with('error', 'Username/email dan password wajib diisi.');
         }
-        // --- KODE REVISI SELESAI ---
+
+        $user = $this->userModel
+            ->groupStart()
+                ->where('username', $login)
+                ->orWhere('email', $login)
+            ->groupEnd()
+            ->first();
+
+        if (! $user) {
+            return redirect()->back()->withInput()->with('error', 'Username atau email tidak ditemukan!');
+        }
+
+        if (! password_verify($password, $user['password'])) {
+            return redirect()->back()->withInput()->with('error', 'Password salah!');
+        }
+
+        if (($user['status'] ?? 'non-aktif') !== 'aktif' || (int) ($user['is_active'] ?? 0) !== 1) {
+            return redirect()->back()->with('error', 'Akun Anda dinonaktifkan. Hubungi Admin.');
+        }
+
+        $this->userModel->update($user['id'], [
+            'last_login' => date('Y-m-d H:i:s')
+        ]);
+
+        session()->set([
+            'user_id'   => $user['id'],
+            'username'  => $user['username'],
+            'fullname'  => $user['fullname'],
+            'email'     => $user['email'],
+            'role'      => $user['role'],
+            'photo'     => $user['photo'] ?? null,
+            'logged_in' => true,
+        ]);
+
+        return redirect()->to('/dashboard');
     }
 
-    // 5. Keluar dari Aplikasi
     public function logout()
     {
         session()->destroy();

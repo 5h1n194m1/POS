@@ -18,29 +18,48 @@
             <h3 class="text-center fw-bold mb-3">POS KASIR</h3>
             <p class="text-muted text-center mb-4">Silakan login untuk masuk ke sistem</p>
 
-            <?php if(session()->getFlashdata('error')): ?>
+            <?php if (session()->getFlashdata('error')): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <?= session()->getFlashdata('error') ?>
+                    <?= esc(session()->getFlashdata('error')) ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
 
-            <?php if(session()->getFlashdata('msg')): ?>
+            <?php if (session()->getFlashdata('msg')): ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?= session()->getFlashdata('msg') ?>
+                    <?= esc(session()->getFlashdata('msg')) ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php endif; ?>
 
             <form action="<?= base_url('login') ?>" method="post">
+                <?= csrf_field(); ?>
+
                 <div class="mb-3">
-                    <label for="email" class="form-label">Alamat Email</label>
-                    <input type="email" name="email" class="form-control" id="email" placeholder="nama@email.com" required>
+                    <label for="login" class="form-label">Username atau Email</label>
+                    <input
+                        type="text"
+                        name="login"
+                        class="form-control"
+                        id="login"
+                        value="<?= old('login') ?>"
+                        placeholder="Masukkan username atau email"
+                        required
+                    >
                 </div>
+
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="••••••••" required>
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        id="password"
+                        placeholder="••••••••"
+                        required
+                    >
                 </div>
+
                 <div class="d-grid gap-2 mt-4">
                     <button type="submit" class="btn btn-primary py-2">Masuk Sekarang</button>
                 </div>
@@ -48,7 +67,7 @@
 
             <hr class="my-4">
             <div class="text-center">
-                <span class="text-muted">Belum punya akun?</span> 
+                <span class="text-muted">Belum punya akun?</span>
                 <a href="<?= base_url('register') ?>" class="text-decoration-none">Daftar di sini</a>
             </div>
         </div>
