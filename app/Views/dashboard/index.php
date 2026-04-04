@@ -6,56 +6,85 @@ $isAdmin = (session()->get('role') === 'admin');
 
 $quickMenus = [
     [
-        'label' => 'Transaksi Baru',
+        'label' => 'Kasir',
         'icon'  => 'fas fa-cash-register',
         'url'   => base_url('kasir'),
         'color' => 'primary',
+        'desc'  => 'Mulai transaksi dengan cepat',
     ],
     [
         'label' => 'Profil Saya',
         'icon'  => 'fas fa-user-circle',
         'url'   => base_url('profile'),
         'color' => 'secondary',
+        'desc'  => 'Atur akun dan foto profil',
     ],
 ];
 
 if ($isAdmin) {
     $quickMenus = [
         [
-            'label' => 'Transaksi Baru',
+            'label' => 'Kasir',
             'icon'  => 'fas fa-cash-register',
             'url'   => base_url('kasir'),
             'color' => 'primary',
+            'desc'  => 'Buka halaman kasir utama',
         ],
         [
             'label' => 'Data Barang',
             'icon'  => 'fas fa-boxes',
             'url'   => base_url('product'),
             'color' => 'success',
+            'desc'  => 'Kelola produk dan stok',
+        ],
+        [
+            'label' => 'Kategori',
+            'icon'  => 'fas fa-tags',
+            'url'   => base_url('kategori'),
+            'color' => 'info',
+            'desc'  => 'Atur kategori barang',
+        ],
+        [
+            'label' => 'Member',
+            'icon'  => 'fas fa-id-card-alt',
+            'url'   => base_url('member'),
+            'color' => 'secondary',
+            'desc'  => 'Kelola member dan data pelanggan loyal',
         ],
         [
             'label' => 'Riwayat',
             'icon'  => 'fas fa-history',
             'url'   => base_url('riwayat-transaksi'),
             'color' => 'warning',
+            'desc'  => 'Lihat transaksi yang sudah lewat',
         ],
         [
             'label' => 'Laporan',
             'icon'  => 'fas fa-chart-line',
             'url'   => base_url('laporan-penjualan'),
             'color' => 'danger',
+            'desc'  => 'Pantau omzet dan performa penjualan',
+        ],
+        [
+            'label' => 'Keuntungan',
+            'icon'  => 'fas fa-coins',
+            'url'   => base_url('laporan-keuntungan'),
+            'color' => 'warning',
+            'desc'  => 'Lihat laba kotor, diskon, dan margin penjualan',
         ],
         [
             'label' => 'Karyawan',
             'icon'  => 'fas fa-users',
             'url'   => base_url('user'),
             'color' => 'info',
+            'desc'  => 'Kelola akun pengguna sistem',
         ],
         [
             'label' => 'Profil Saya',
             'icon'  => 'fas fa-user-circle',
             'url'   => base_url('profile'),
             'color' => 'dark',
+            'desc'  => 'Perbarui data akun pribadi',
         ],
     ];
 }
@@ -124,6 +153,13 @@ if ($isAdmin) {
         line-height: 1.2;
     }
 
+    .quick-menu-desc {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.45;
+        color: #6b7280;
+    }
+
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -187,9 +223,16 @@ if ($isAdmin) {
         color: #f9fafb !important;
     }
 
+    body.dark-mode .quick-menu-desc,
     body.dark-mode .mini-muted,
     body.dark-mode .stat-label {
         color: #9ca3af !important;
+    }
+
+    @media (max-width: 991.98px) {
+        .quick-menu-card {
+            min-height: 132px;
+        }
     }
 
     @media (min-width: 992px) {
@@ -215,6 +258,7 @@ if ($isAdmin) {
 
 <div class="mb-4">
     <div class="section-title">Menu Cepat</div>
+    <small class="text-muted d-block mb-3">Semua halaman utama yang sudah dirapikan untuk pemakaian di HP bisa dibuka dari sini.</small>
     <div class="quick-menu-grid">
         <?php foreach ($quickMenus as $menu): ?>
             <a href="<?= $menu['url'] ?>" class="quick-menu-card">
@@ -222,6 +266,7 @@ if ($isAdmin) {
                     <i class="<?= esc($menu['icon']) ?>"></i>
                 </div>
                 <div class="quick-menu-label"><?= esc($menu['label']) ?></div>
+                <div class="quick-menu-desc"><?= esc($menu['desc'] ?? '') ?></div>
             </a>
         <?php endforeach; ?>
     </div>

@@ -13,6 +13,10 @@
 ?>
 
 <style>
+    .kasir-layout {
+        align-items: flex-start;
+    }
+
     .search-dropdown {
         position: absolute;
         top: 100%;
@@ -64,6 +68,7 @@
         overflow-x: auto;
         gap: 12px;
         padding-bottom: 10px;
+        scrollbar-width: thin;
     }
 
     .product-card {
@@ -103,9 +108,47 @@
         margin-right: 8px;
     }
 
+    .checkout-breakdown {
+        display: grid;
+        gap: 10px;
+    }
+
+    .checkout-breakdown-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: rgba(248, 250, 252, 0.9);
+        border: 1px solid #e5e7eb;
+    }
+
+    .checkout-breakdown-item strong {
+        font-size: 1rem;
+    }
+
+        .cart-table-wrap {
+            height: 420px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+    .checkout-card {
+        position: sticky;
+        top: 78px;
+    }
+
+    .shortcut-card {
+        position: sticky;
+        top: 390px;
+    }
+
     body.dark-mode .product-card,
     body.dark-mode .summary-chip,
-    body.dark-mode .search-dropdown {
+    body.dark-mode .search-dropdown,
+    body.dark-mode .checkout-breakdown-item {
         background-color: #2b3035 !important;
         border-color: #495057 !important;
         color: #fff !important;
@@ -123,6 +166,194 @@
     body.dark-mode .search-dropdown .dropdown-item strong,
     body.dark-mode .search-dropdown .dropdown-item small {
         color: #fff !important;
+    }
+
+    @media (max-width: 991.98px) {
+        .product-grid {
+            gap: 10px;
+            padding-bottom: 4px;
+            margin-left: -2px;
+            margin-right: -2px;
+        }
+
+        .product-card {
+            flex-basis: 132px;
+            min-height: 124px;
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .product-card .product-name {
+            min-height: 48px;
+            font-size: .95rem;
+            line-height: 1.35;
+        }
+
+        .summary-chip {
+            width: 100%;
+            justify-content: center;
+            margin-right: 0;
+        }
+
+        .input-group-lg {
+            flex-wrap: wrap !important;
+        }
+
+        .input-group-lg > .input-group-prepend,
+        .input-group-lg > .input-group-append {
+            display: flex;
+        }
+
+        .input-group-lg > .input-group-prepend > .input-group-text {
+            border-radius: 0.75rem 0 0 0.75rem !important;
+            height: 54px;
+        }
+
+        .input-group-lg > .form-control.font-weight-bold {
+            width: calc(100% - 52px);
+            flex: 1 1 calc(100% - 52px);
+            border-radius: 0 0.75rem 0.75rem 0 !important;
+        }
+
+        #input-qty {
+            flex: 1 1 100%;
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 0.75rem !important;
+        }
+
+        .input-group-lg > .input-group-append {
+            flex: 1 1 100%;
+            margin-top: 10px;
+        }
+
+        .input-group-lg > .input-group-append > .btn {
+            width: 100%;
+            border-radius: 0.75rem !important;
+            min-height: 52px;
+        }
+
+        .search-dropdown {
+            top: calc(100% + 64px);
+            border-radius: 0.75rem;
+        }
+
+        .cart-table-wrap {
+            height: auto;
+            max-height: none;
+            border: 0;
+            margin-top: 18px;
+            overflow: visible;
+        }
+
+        .cart-table-wrap > .table {
+            min-width: 100% !important;
+            width: 100% !important;
+            table-layout: fixed;
+        }
+
+        #table-cart thead {
+            display: none;
+        }
+
+        #table-cart,
+        #table-cart tbody,
+        #table-cart tr,
+        #table-cart td {
+            display: block;
+            width: 100%;
+        }
+
+        #table-cart tr {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+        }
+
+        #table-cart tr.empty-row {
+            display: block;
+            text-align: center;
+            padding: 24px 14px;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        #table-cart tr.empty-row td {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            text-align: center !important;
+            padding: 0 !important;
+            color: #6b7280;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        #table-cart tr.empty-row td::before {
+            content: none !important;
+        }
+
+        #table-cart td {
+            border: 0 !important;
+            padding: 3px 0 !important;
+            text-align: left !important;
+        }
+
+        #table-cart td:nth-child(2)::before,
+        #table-cart td:nth-child(3)::before,
+        #table-cart td:nth-child(4)::before {
+            display: block;
+            font-size: .72rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: .3px;
+            margin-bottom: 2px;
+        }
+
+        #table-cart td:nth-child(2)::before {
+            content: 'Harga';
+        }
+
+        #table-cart td:nth-child(3)::before {
+            content: 'Qty';
+        }
+
+        #table-cart td:nth-child(4)::before {
+            content: 'Subtotal';
+        }
+
+        #table-cart td:last-child {
+            text-align: right !important;
+            padding-top: 8px !important;
+        }
+
+        .checkout-card,
+        .shortcut-card {
+            position: static;
+            top: auto;
+        }
+
+        .info-box .info-box-number {
+            font-size: 1.5rem !important;
+            line-height: 1.25;
+            word-break: break-word;
+        }
+
+        #input-bayar {
+            font-size: 1.55rem !important;
+            height: 70px !important;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .summary-chip {
+            font-size: .8rem;
+        }
     }
 </style>
 
@@ -147,7 +378,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row kasir-layout">
     <div class="col-md-8">
 
         <div class="mb-3">
@@ -204,7 +435,7 @@
                     </div>
                 </form>
 
-                <div class="table-responsive mt-4" style="height: 420px; overflow-y: auto; border: 1px solid #eee; border-radius: 8px;">
+                <div class="table-responsive mt-4 cart-table-wrap">
                     <table class="table table-hover table-striped mb-0" id="table-cart">
                         <thead class="bg-light">
                             <tr>
@@ -251,15 +482,72 @@
             <div class="info-box-content text-right">
                 <span class="info-box-text">TOTAL TRANSAKSI</span>
                 <span class="info-box-number h1 mb-0" id="label-grandtotal">Rp <?= number_format($grandTotal, 0, ',', '.') ?></span>
+                <div class="small mt-2 opacity-75">
+                    <div>Subtotal: <span id="label-subtotal">Rp <?= number_format($grandTotal, 0, ',', '.') ?></span></div>
+                    <div>Diskon: <span id="label-diskon">Rp 0</span></div>
+                </div>
             </div>
         </div>
 
-        <div class="card shadow-sm border-primary">
+        <div class="card shadow-sm border-primary checkout-card">
             <div class="card-body">
                 <form id="form-checkout">
                     <?= csrf_field() ?>
                     <input type="hidden" name="total" id="hidden-total" value="<?= $grandTotal ?>">
                     <input type="hidden" name="kembalian" id="hidden-kembalian" value="0">
+
+                    <div class="form-group">
+                        <label class="small text-muted font-weight-bold">MEMBER SPESIAL</label>
+                        <select name="member_id" id="select-member" class="form-control select2" data-placeholder="Pilih member (opsional)">
+                            <option value=""></option>
+                            <?php foreach (($members ?? []) as $member): ?>
+                                <option value="<?= $member['id'] ?>">
+                                    <?= esc($member['nama']) ?> | <?= esc($member['no_member']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <small class="text-muted d-block mt-1">Diskon fleksibel hanya aktif jika member dipilih.</small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label class="small text-muted font-weight-bold">TIPE DISKON</label>
+                                <select name="diskon_type" id="discount-type" class="form-control" disabled>
+                                    <option value="">Tanpa Diskon</option>
+                                    <option value="nominal">Nominal</option>
+                                    <option value="percent">Persen (%)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group">
+                                <label class="small text-muted font-weight-bold">NILAI DISKON</label>
+                                <input
+                                    type="number"
+                                    name="diskon_input"
+                                    id="discount-input"
+                                    class="form-control text-right"
+                                    value="0"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0"
+                                    disabled
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-breakdown mb-3">
+                        <div class="checkout-breakdown-item">
+                            <span class="small font-weight-bold text-muted">Subtotal Kotor</span>
+                            <strong id="summary-subtotal">Rp <?= number_format($grandTotal, 0, ',', '.') ?></strong>
+                        </div>
+                        <div class="checkout-breakdown-item">
+                            <span class="small font-weight-bold text-muted">Diskon Member</span>
+                            <strong class="text-danger" id="summary-discount">Rp 0</strong>
+                        </div>
+                    </div>
 
                     <div class="form-group mb-3">
                         <label class="small text-muted font-weight-bold">BAYAR TUNAI (F8)</label>
@@ -299,7 +587,7 @@
             </div>
         </div>
 
-        <div class="card card-outline card-secondary shadow-sm mt-3">
+        <div class="card card-outline card-secondary shadow-sm mt-3 shortcut-card">
             <div class="card-body">
                 <div class="small text-muted font-weight-bold mb-2">Shortcut Keyboard</div>
                 <div class="d-flex justify-content-between mb-2">
@@ -327,16 +615,29 @@
         const inputBayar = $('#input-bayar');
         const checkoutButton = $('#btn-checkout');
         const addButton = $('#btn-submit-cart');
+        const memberSelect = $('#select-member');
+        const discountType = $('#discount-type');
+        const discountInput = $('#discount-input');
 
         const checkoutButtonDefaultHtml = '<i class="fas fa-cash-register mr-2"></i> SELESAI TRANSAKSI';
         const addButtonDefaultHtml = '<i class="fas fa-cart-plus"></i>';
 
+        let currentGrossTotal = <?= (float) $grandTotal ?>;
+        let currentDiscountAmount = 0;
         let currentTotal = <?= (float) $grandTotal ?>;
         let searchTimer = null;
         let isCheckoutProcessing = false;
         let isAddToCartProcessing = false;
 
+        memberSelect.select2({
+            theme: 'bootstrap4',
+            width: '100%',
+            allowClear: true,
+            placeholder: memberSelect.data('placeholder')
+        });
+
         searchInput.focus();
+        updateDiscountControls();
 
         function escapeHtml(text) {
             return String(text ?? '')
@@ -367,6 +668,56 @@
             return count;
         }
 
+        function updateDiscountControls() {
+            const hasMember = memberSelect.val() !== '';
+            discountType.prop('disabled', !hasMember);
+            discountInput.prop('disabled', !hasMember);
+
+            if (!hasMember) {
+                discountType.val('');
+                discountInput.val(0);
+            }
+
+            recalculateCheckoutSummary();
+        }
+
+        function calculateDiscountAmount() {
+            const hasMember = memberSelect.val() !== '';
+            const type = discountType.val();
+            const rawValue = parseFloat(discountInput.val()) || 0;
+
+            if (!hasMember || !type || rawValue <= 0 || currentGrossTotal <= 0) {
+                return 0;
+            }
+
+            if (type === 'percent') {
+                const percent = Math.min(rawValue, 100);
+                return currentGrossTotal * (percent / 100);
+            }
+
+            return Math.min(rawValue, currentGrossTotal);
+        }
+
+        function recalculateCheckoutSummary() {
+            currentDiscountAmount = calculateDiscountAmount();
+            currentTotal = Math.max(currentGrossTotal - currentDiscountAmount, 0);
+
+            $('#hidden-total').val(currentTotal);
+            $('#label-grandtotal').text(formatRupiah(currentTotal));
+            $('#cart-total-label').text(formatRupiah(currentTotal));
+            $('#label-subtotal').text(formatRupiah(currentGrossTotal));
+            $('#label-diskon').text(formatRupiah(currentDiscountAmount));
+            $('#summary-subtotal').text(formatRupiah(currentGrossTotal));
+            $('#summary-discount').text(formatRupiah(currentDiscountAmount));
+
+            checkoutButton
+                .toggleClass('disabled', currentGrossTotal <= 0)
+                .prop('disabled', currentGrossTotal <= 0);
+
+            inputBayar.attr('min', currentTotal);
+            calculateReturn();
+        }
+
         function calculateReturn() {
             const bayar = parseFloat(inputBayar.val()) || 0;
             const kembalian = bayar - currentTotal;
@@ -379,10 +730,7 @@
         function updateTable(cart, total) {
             let html = '';
 
-            currentTotal = parseFloat(total || 0);
-            $('#hidden-total').val(currentTotal);
-            $('#label-grandtotal').text(formatRupiah(currentTotal));
-            $('#cart-total-label').text(formatRupiah(currentTotal));
+            currentGrossTotal = parseFloat(total || 0);
             $('#cart-items-label').text(calculateItemCount(cart));
 
             if (cart && Object.keys(cart).length > 0) {
@@ -414,13 +762,7 @@
             }
 
             $('#table-cart tbody').html(html);
-
-            checkoutButton
-                .toggleClass('disabled', currentTotal <= 0)
-                .prop('disabled', currentTotal <= 0);
-
-            inputBayar.attr('min', currentTotal);
-            calculateReturn();
+            recalculateCheckoutSummary();
         }
 
         function renderSearchResults(keyword) {
@@ -515,6 +857,10 @@
             inputBayar.val('');
             $('#hidden-kembalian').val(0);
             $('#label-kembalian').text('Rp 0');
+            memberSelect.val('').trigger('change');
+            discountType.val('');
+            discountInput.val(0);
+            updateDiscountControls();
             resetInputs();
         }
 
@@ -582,6 +928,29 @@
             $(this).val(qty);
         });
 
+        memberSelect.on('change', updateDiscountControls);
+
+        discountType.on('change', function() {
+            if ($(this).val() !== 'percent' && (parseFloat(discountInput.val()) || 0) < 0) {
+                discountInput.val(0);
+            }
+            recalculateCheckoutSummary();
+        });
+
+        discountInput.on('input', function() {
+            let value = parseFloat($(this).val()) || 0;
+            if (value < 0) {
+                value = 0;
+            }
+
+            if (discountType.val() === 'percent' && value > 100) {
+                value = 100;
+            }
+
+            $(this).val(value);
+            recalculateCheckoutSummary();
+        });
+
         inputBayar.on('input', calculateReturn);
 
         $('#form-checkout').on('submit', function(e) {
@@ -629,8 +998,9 @@
                             reverseButtons: true
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                if (response.print_url) {
-                                    window.open(response.print_url, '_blank', 'width=420,height=650');
+                                const printUrl = response.print_url_80 || response.print_url || response.print_url_58 || '';
+                                if (printUrl) {
+                                    window.open(printUrl, '_blank', 'width=420,height=650');
                                 } else {
                                     Swal.fire('Info', 'URL cetak nota tidak tersedia.', 'info');
                                 }

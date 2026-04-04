@@ -1,6 +1,27 @@
 <?= $this->extend('layout/main') ?>
 <?= $this->section('content') ?>
 
+<style>
+    @media (max-width: 991.98px) {
+        .report-action-stack .btn {
+            width: 100%;
+            margin-right: 0 !important;
+            margin-bottom: 10px;
+        }
+
+        #report-summary-cards .small-box .inner h3 {
+            font-size: 1.35rem;
+            white-space: normal;
+        }
+
+        #salesTrendChart,
+        #topProductsChart {
+            min-height: 260px !important;
+            height: 260px !important;
+        }
+    }
+</style>
+
 <div class="content-header">
     <div class="container-fluid px-0">
         <div class="row mb-2">
@@ -55,8 +76,8 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between flex-wrap">
-            <div class="mb-2">
+        <div class="d-flex justify-content-between flex-wrap report-action-stack">
+            <div class="mb-2 w-100 w-md-auto">
                 <button type="button" id="btn-export-report" class="btn btn-success mr-2">
                     <i class="fas fa-file-csv mr-1"></i> Export CSV
                 </button>
@@ -65,7 +86,7 @@
                 </button>
             </div>
 
-            <div class="mb-2">
+            <div class="mb-2 w-100 w-md-auto text-md-right">
                 <button type="button" id="btn-reset-report" class="btn btn-outline-secondary mr-2">
                     <i class="fas fa-undo mr-1"></i> Reset
                 </button>

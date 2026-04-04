@@ -2,15 +2,18 @@
 
 namespace App\Controllers;
 
+use App\Models\MemberModel;
 use App\Models\ProductModel;
 
 class Kasir extends BaseController
 {
     protected $productModel;
+    protected $memberModel;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
+        $this->memberModel  = new MemberModel();
     }
 
     public function index()
@@ -22,6 +25,7 @@ class Kasir extends BaseController
         return view('kasir/index', [
             'title'    => 'Transaksi Kasir',
             'products' => $products,
+            'members'  => $this->memberModel->orderBy('nama', 'ASC')->findAll(),
         ]);
     }
 

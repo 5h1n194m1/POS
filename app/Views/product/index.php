@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="card-body p-0">
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
             <table class="table table-hover table-striped mb-0">
                 <thead class="thead-light">
                     <tr>
@@ -55,6 +55,10 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="d-md-none p-3" id="product-card-list">
+            <div class="text-center text-muted py-4">Memuat data produk...</div>
         </div>
     </div>
 </div>
@@ -85,7 +89,13 @@
 
                 <div class="form-group">
                     <label>Kategori</label>
-                    <input type="text" name="kategori" id="product-kategori" class="form-control">
+                    <select name="kategori_id" id="product-kategori" class="form-control" data-placeholder="Pilih kategori">
+                        <option value=""></option>
+                        <?php foreach (($categories ?? []) as $category): ?>
+                            <option value="<?= (int) $category['id'] ?>"><?= esc($category['nama_kategori']) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small class="text-muted">Pilih kategori dari data kategori yang sudah dibuat.</small>
                 </div>
 
                 <div class="form-group">
@@ -136,10 +146,15 @@ function renderProducts(rows) {
                 <td colspan="9" class="text-center py-4 text-muted">Tidak ada data produk.</td>
             </tr>
         `);
+
+        $('#product-card-list').html(`
+            <div class="text-center py-4 text-muted">Tidak ada data produk.</div>
+        `);
         return;
     }
 
     let html = '';
+    let cardHtml = '';
     rows.forEach(product => {
         html += `
             <tr>
@@ -161,9 +176,48 @@ function renderProducts(rows) {
                 </td>
             </tr>
         `;
+
+        cardHtml += `
+            <div class="card mb-3 shadow-sm border-0">
+                <div class="card-body p-3">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="pr-2">
+                            <div class="small text-muted">${escapeHtml(product.kode_produk || '-')}</div>
+                            <div class="font-weight-bold mb-1">${escapeHtml(product.nama_produk || '-')}</div>
+                            <span class="badge badge-info">${escapeHtml(product.kategori || 'Tanpa kategori')}</span>
+                        </div>
+                        <span class="badge badge-light">Stok: ${parseInt(product.stok || 0)}</span>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <small class="text-muted d-block">Harga Beli</small>
+                            <strong>${formatRupiah(product.harga_beli)}</strong>
+                        </div>
+                        <div class="col-6 text-right">
+                            <small class="text-muted d-block">Harga Jual</small>
+                            <strong class="text-primary">${formatRupiah(product.harga_jual)}</strong>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        <small class="text-muted">${escapeHtml(product.updated_at || '-')}</small>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-primary btn-edit-product" data-id="${product.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <a href="<?= base_url('product/delete') ?>/${product.id}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Yakin ingin menghapus produk ini?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
     });
 
     $('#product-table-body').html(html);
+    $('#product-card-list').html(cardHtml);
 }
 
 function loadProducts() {
@@ -176,6 +230,7 @@ function loadProducts() {
 function resetProductForm() {
     $('#productForm')[0].reset();
     $('#product-id').val('');
+    $('#product-kategori').val('').trigger('change');
 }
 
 function openAddProductModal() {
@@ -196,7 +251,7 @@ function openEditProductModal(id) {
     $('#product-id').val(product.id);
     $('#product-kode').val(product.kode_produk);
     $('#product-nama').val(product.nama_produk);
-    $('#product-kategori').val(product.kategori);
+    $('#product-kategori').val(product.kategori_id || '').trigger('change');
     $('#product-harga-beli').val(product.harga_beli);
     $('#product-harga-jual').val(product.harga_jual);
     $('#product-stok').val(product.stok);
@@ -206,6 +261,14 @@ function openEditProductModal(id) {
 
 $(document).ready(function() {
     loadProducts();
+
+    $('#product-kategori').select2({
+        theme: 'bootstrap4',
+        dropdownParent: $('#productModal'),
+        placeholder: 'Pilih kategori',
+        allowClear: true,
+        width: '100%'
+    });
 
     $('#btn-add-product').on('click', function() {
         openAddProductModal();

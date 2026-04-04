@@ -146,6 +146,18 @@
             <td>Kasir</td>
             <td class="right"><?= esc($penjualan['fullname'] ?? $penjualan['username'] ?? '-') ?></td>
         </tr>
+        <?php if (!empty($penjualan['member_nama'])): ?>
+        <tr>
+            <td>Member</td>
+            <td class="right"><?= esc($penjualan['member_nama']) ?></td>
+        </tr>
+        <?php endif; ?>
+        <?php if (!empty($penjualan['member_no'])): ?>
+        <tr>
+            <td>No Member</td>
+            <td class="right"><?= esc($penjualan['member_no']) ?></td>
+        </tr>
+        <?php endif; ?>
     </table>
 
     <div class="divider"></div>
@@ -169,6 +181,18 @@
     <div class="divider"></div>
 
     <table class="totals">
+        <?php if ((float) ($penjualan['subtotal_kotor'] ?? 0) > 0): ?>
+        <tr>
+            <td>Subtotal</td>
+            <td class="right">Rp <?= number_format((float) ($penjualan['subtotal_kotor'] ?? 0), 0, ',', '.') ?></td>
+        </tr>
+        <?php endif; ?>
+        <?php if ((float) ($penjualan['diskon_nominal'] ?? 0) > 0): ?>
+        <tr>
+            <td>Diskon<?= !empty($penjualan['diskon_type']) ? ' (' . ($penjualan['diskon_type'] === 'percent' ? rtrim(rtrim(number_format((float) ($penjualan['diskon_input'] ?? 0), 2, '.', ''), '0'), '.') . '%' : 'Nominal') . ')' : '' ?></td>
+            <td class="right">- Rp <?= number_format((float) ($penjualan['diskon_nominal'] ?? 0), 0, ',', '.') ?></td>
+        </tr>
+        <?php endif; ?>
         <tr>
             <td class="bold">TOTAL</td>
             <td class="right bold">Rp <?= number_format((float) ($penjualan['total_harga'] ?? 0), 0, ',', '.') ?></td>

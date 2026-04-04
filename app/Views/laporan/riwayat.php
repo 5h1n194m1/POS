@@ -1,6 +1,29 @@
 <?= $this->extend('layout/main') ?>
 <?= $this->section('content') ?>
 
+<style>
+    @media (max-width: 991.98px) {
+        #riwayat-summary-cards .small-box .inner h3 {
+            font-size: 1.2rem;
+            white-space: normal;
+        }
+
+        .history-action-stack {
+            display: block !important;
+        }
+
+        .history-action-stack .btn {
+            width: 100%;
+            margin-right: 0 !important;
+            margin-bottom: 10px;
+        }
+
+        #detail-transaksi-content .table-responsive > .table {
+            min-width: 520px;
+        }
+    }
+</style>
+
 <div class="content-header">
     <div class="container-fluid px-0">
         <div class="row mb-2">
@@ -75,7 +98,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end history-action-stack">
             <button type="button" id="btn-reset-history" class="btn btn-outline-secondary mr-2">
                 <i class="fas fa-undo mr-1"></i> Reset
             </button>
@@ -212,10 +235,13 @@ function loadTransactionDetail(id) {
                         <tr><th width="120">Invoice</th><td>: ${escapeHtml(response.invoice_no)}</td></tr>
                         <tr><th>Tanggal</th><td>: ${escapeHtml(response.header.created_at)}</td></tr>
                         <tr><th>Kasir</th><td>: ${escapeHtml(response.header.fullname)}</td></tr>
+                        <tr><th>Member</th><td>: ${escapeHtml(response.header.member_nama || '-')}</td></tr>
                     </table>
                 </div>
                 <div class="col-md-6">
                     <table class="table table-sm table-borderless mb-0">
+                        <tr><th width="120">Subtotal</th><td>: ${formatRupiah(response.header.subtotal_kotor || response.header.total_harga)}</td></tr>
+                        <tr><th>Diskon</th><td>: ${formatRupiah(response.header.diskon_nominal || 0)}</td></tr>
                         <tr><th width="120">Total</th><td>: <span class="font-weight-bold text-primary">${formatRupiah(response.header.total_harga)}</span></td></tr>
                         <tr><th>Bayar</th><td>: ${formatRupiah(response.header.bayar)}</td></tr>
                         <tr><th>Kembalian</th><td>: <span class="font-weight-bold text-success">${formatRupiah(response.header.kembalian)}</span></td></tr>
@@ -236,7 +262,7 @@ function loadTransactionDetail(id) {
                 </table>
             </div>
             <div class="text-right mt-3">
-                <a href="<?= base_url('penjualan/print_nota') ?>/${response.header.id}" target="_blank" class="btn btn-success">
+                <a href="<?= base_url('penjualan/print_nota') ?>/${response.header.id}?paper=80" target="_blank" class="btn btn-success">
                     <i class="fas fa-print mr-1"></i> Cetak Ulang Nota
                 </a>
             </div>

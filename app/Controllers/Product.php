@@ -2,24 +2,28 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use Config\Services;
 
 class Product extends BaseController
 {
     protected $productModel;
+    protected $categoryModel;
     protected $validation;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
+        $this->categoryModel = new CategoryModel();
         $this->validation   = Services::validation();
     }
 
     public function index()
     {
         return view('product/index', [
-            'title' => 'Data Produk',
+            'title'      => 'Data Produk',
+            'categories' => $this->categoryModel->orderBy('nama_kategori', 'ASC')->findAll(),
         ]);
     }
 
@@ -36,10 +40,14 @@ class Product extends BaseController
 
     public function save()
     {
+        $kategoriId = (int) $this->request->getPost('kategori_id');
+        $category   = $kategoriId > 0 ? $this->categoryModel->find($kategoriId) : null;
+
         $data = [
             'nama_produk' => trim((string) $this->request->getPost('nama_produk')),
             'kode_produk' => trim((string) $this->request->getPost('kode_produk')),
-            'kategori'    => trim((string) $this->request->getPost('kategori')),
+            'kategori_id' => $kategoriId ?: null,
+            'kategori'    => $category['nama_kategori'] ?? '',
             'harga_beli'  => (float) $this->request->getPost('harga_beli'),
             'harga_jual'  => (float) $this->request->getPost('harga_jual'),
             'stok'        => (int) $this->request->getPost('stok'),
@@ -48,7 +56,7 @@ class Product extends BaseController
         $this->validation->setRules([
             'nama_produk' => 'required|min_length[2]|max_length[255]',
             'kode_produk' => 'permit_empty|max_length[50]',
-            'kategori'    => 'permit_empty|max_length[100]',
+            'kategori_id' => 'permit_empty|integer',
             'harga_beli'  => 'required|decimal',
             'harga_jual'  => 'required|decimal',
             'stok'        => 'required|integer',
@@ -59,6 +67,13 @@ class Product extends BaseController
                 'status' => 'error',
                 'msg'    => 'Validasi gagal.',
                 'errors' => $this->validation->getErrors(),
+            ]);
+        }
+
+        if ($kategoriId > 0 && ! $category) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Kategori yang dipilih tidak valid.',
             ]);
         }
 
@@ -82,8 +97,10 @@ class Product extends BaseController
 
     public function update()
     {
-        $id = (int) $this->request->getPost('id');
+        $id      = (int) $this->request->getPost('id');
+        $kategoriId = (int) $this->request->getPost('kategori_id');
         $product = $this->productModel->find($id);
+        $category = $kategoriId > 0 ? $this->categoryModel->find($kategoriId) : null;
 
         if (! $product) {
             return $this->response->setStatusCode(404)->setJSON([
@@ -95,7 +112,8 @@ class Product extends BaseController
         $data = [
             'nama_produk' => trim((string) $this->request->getPost('nama_produk')),
             'kode_produk' => trim((string) $this->request->getPost('kode_produk')),
-            'kategori'    => trim((string) $this->request->getPost('kategori')),
+            'kategori_id' => $kategoriId ?: null,
+            'kategori'    => $category['nama_kategori'] ?? '',
             'harga_beli'  => (float) $this->request->getPost('harga_beli'),
             'harga_jual'  => (float) $this->request->getPost('harga_jual'),
             'stok'        => (int) $this->request->getPost('stok'),
@@ -104,7 +122,7 @@ class Product extends BaseController
         $this->validation->setRules([
             'nama_produk' => 'required|min_length[2]|max_length[255]',
             'kode_produk' => 'permit_empty|max_length[50]',
-            'kategori'    => 'permit_empty|max_length[100]',
+            'kategori_id' => 'permit_empty|integer',
             'harga_beli'  => 'required|decimal',
             'harga_jual'  => 'required|decimal',
             'stok'        => 'required|integer',
@@ -115,6 +133,13 @@ class Product extends BaseController
                 'status' => 'error',
                 'msg'    => 'Validasi gagal.',
                 'errors' => $this->validation->getErrors(),
+            ]);
+        }
+
+        if ($kategoriId > 0 && ! $category) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'status' => 'error',
+                'msg'    => 'Kategori yang dipilih tidak valid.',
             ]);
         }
 

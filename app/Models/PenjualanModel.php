@@ -14,7 +14,21 @@ class PenjualanModel extends Model
     protected $protectFields    = true;
     
     // Pastikan semua kolom yang mau diisi ada di sini
-    protected $allowedFields    = ['user_id', 'total_harga', 'bayar', 'kembalian', 'created_at'];
+    protected $allowedFields    = [
+        'user_id',
+        'member_id',
+        'member_no',
+        'member_nama',
+        'subtotal_kotor',
+        'diskon_type',
+        'diskon_input',
+        'diskon_nominal',
+        'total_modal',
+        'total_harga',
+        'bayar',
+        'kembalian',
+        'created_at',
+    ];
 
     // MATIKAN INI karena kolom updated_at tidak ada di database Anda
     protected $useTimestamps = false; 

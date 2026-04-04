@@ -4,22 +4,19 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductModel extends Model
+class MemberModel extends Model
 {
-    protected $table            = 'produk';
+    protected $table            = 'member';
     protected $primaryKey       = 'id';
-    protected $returnType       = 'array';
     protected $useAutoIncrement = true;
+    protected $returnType       = 'array';
     protected $protectFields    = true;
 
     protected $allowedFields = [
-        'nama_produk',
-        'kode_produk',
-        'kategori_id',
-        'kategori',
-        'harga_beli',
-        'harga_jual',
-        'stok',
+        'no_member',
+        'nama',
+        'alamat',
+        'no_hp',
     ];
 
     protected $useTimestamps = true;

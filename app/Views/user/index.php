@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="card-body p-0">
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
             <table class="table table-hover table-striped mb-0">
                 <thead class="thead-light">
                     <tr>
@@ -48,6 +48,10 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="d-md-none p-3" id="user-card-list">
+            <div class="text-center text-muted py-4">Memuat data user...</div>
         </div>
     </div>
 </div>
@@ -131,10 +135,14 @@ function renderUsers(rows) {
                 <td colspan="10" class="text-center py-4 text-muted">Tidak ada data user.</td>
             </tr>
         `);
+        $('#user-card-list').html(`
+            <div class="text-center py-4 text-muted">Tidak ada data user.</div>
+        `);
         return;
     }
 
     let html = '';
+    let cardHtml = '';
     rows.forEach(user => {
         const avatar = user.avatar
             ? "<?= base_url() ?>/" + user.avatar
@@ -165,9 +173,52 @@ function renderUsers(rows) {
                 </td>
             </tr>
         `;
+
+        cardHtml += `
+            <div class="card mb-3 shadow-sm border-0">
+                <div class="card-body p-3">
+                    <div class="d-flex align-items-start">
+                        <img src="${avatar}" width="48" height="48" style="border-radius:50%;object-fit:cover;" class="mr-3">
+                        <div class="flex-grow-1">
+                            <div class="font-weight-bold">${escapeHtml(user.fullname || '-')}</div>
+                            <div class="small text-muted">@${escapeHtml(user.username || '-')}</div>
+                            <div class="small text-muted">${escapeHtml(user.email || '-')}</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 d-flex flex-wrap">
+                        <span class="badge badge-primary text-uppercase mr-2 mb-2">${escapeHtml(user.role || '-')}</span>
+                        ${user.status === 'aktif'
+                            ? '<span class="badge badge-success mb-2">Aktif</span>'
+                            : '<span class="badge badge-secondary mb-2">Non-Aktif</span>'}
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <small class="text-muted d-block">Last Login</small>
+                            <span>${escapeHtml(user.last_login || '-')}</span>
+                        </div>
+                        <div class="col-6 text-right">
+                            <small class="text-muted d-block">Dibuat</small>
+                            <span>${escapeHtml(user.created_at || '-')}</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-right">
+                        <button type="button" class="btn btn-sm btn-outline-primary btn-edit-user" data-id="${user.id}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-danger btn-delete-user" data-id="${user.id}">
+                            <i class="fas fa-trash"></i> Hapus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
     });
 
     $('#user-table-body').html(html);
+    $('#user-card-list').html(cardHtml);
 }
 
 function loadUsers() {

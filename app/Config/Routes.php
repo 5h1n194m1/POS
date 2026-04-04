@@ -61,6 +61,24 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
             $routes->get('delete/(:num)', 'Product::delete/$1');
         });
 
+        // Kategori
+        $routes->group('kategori', function($routes) {
+            $routes->get('/', 'Category::index');
+            $routes->get('listData', 'Category::listData');
+            $routes->post('save', 'Category::save');
+            $routes->post('update', 'Category::update');
+            $routes->post('delete/(:num)', 'Category::delete/$1');
+        });
+
+        // Member
+        $routes->group('member', function($routes) {
+            $routes->get('/', 'Member::index');
+            $routes->get('listData', 'Member::listData');
+            $routes->post('save', 'Member::save');
+            $routes->post('update', 'Member::update');
+            $routes->post('delete/(:num)', 'Member::delete/$1');
+        });
+
         // User / Karyawan
         $routes->group('user', function($routes) {
             $routes->get('/', 'User::index');
@@ -77,6 +95,14 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->get('laporan-penjualan/chart', 'Laporan::chartData');
         $routes->get('laporan-penjualan/export-csv', 'Laporan::exportCsv');
         $routes->get('laporan-penjualan/print', 'Laporan::printReport');
+
+        // Laporan keuntungan
+        $routes->get('laporan-keuntungan', 'Keuntungan::index');
+        $routes->get('laporan-keuntungan/summary', 'Keuntungan::summary');
+        $routes->get('laporan-keuntungan/chart', 'Keuntungan::chartData');
+        $routes->get('laporan-keuntungan/data', 'Keuntungan::tableData');
+        $routes->get('laporan-keuntungan/export-csv', 'Keuntungan::exportCsv');
+        $routes->get('laporan-keuntungan/print', 'Keuntungan::printReport');
 
         // Riwayat
         $routes->get('riwayat-transaksi', 'Laporan::riwayat');

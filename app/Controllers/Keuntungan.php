@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Config\Database;
 
-class Laporan extends BaseController
+class Keuntungan extends BaseController
 {
     protected $db;
 
@@ -17,21 +17,8 @@ class Laporan extends BaseController
     {
         $filter = $this->resolveDateRange();
 
-        return view('laporan/index', [
-            'title'         => 'Laporan Penjualan',
-            'cashiers'      => $this->getCashiers(),
-            'defaultStart'  => $filter['start_date'],
-            'defaultEnd'    => $filter['end_date'],
-            'defaultPeriod' => $filter['period'],
-        ]);
-    }
-
-    public function riwayat()
-    {
-        $filter = $this->resolveDateRange();
-
-        return view('laporan/riwayat', [
-            'title'         => 'Riwayat Transaksi',
+        return view('keuntungan/index', [
+            'title'         => 'Laporan Keuntungan',
             'cashiers'      => $this->getCashiers(),
             'defaultStart'  => $filter['start_date'],
             'defaultEnd'    => $filter['end_date'],
@@ -45,21 +32,22 @@ class Laporan extends BaseController
         $cashierId = $this->request->getGet('cashier_id');
 
         $builder = $this->db->table('penjualan p');
-        $builder->select('COUNT(p.id) as total_transaksi, COALESCE(SUM(p.total_harga), 0) as omzet, COALESCE(AVG(p.total_harga), 0) as rata_transaksi');
+        $builder->select('
+            COUNT(p.id) as total_transaksi,
+            COALESCE(SUM(p.subtotal_kotor), 0) as omzet_kotor,
+            COALESCE(SUM(p.diskon_nominal), 0) as total_diskon,
+            COALESCE(SUM(p.total_modal), 0) as total_modal,
+            COALESCE(SUM(p.total_harga - p.total_modal), 0) as laba_bersih
+        ');
         $this->applyFilters($builder, $filter, 'p.created_at', 'p.user_id', $cashierId);
         $summary = $builder->get()->getRowArray();
 
-        $itemBuilder = $this->db->table('penjualan_detail d');
-        $itemBuilder->select('COALESCE(SUM(d.qty), 0) as total_item');
-        $itemBuilder->join('penjualan p', 'p.id = d.penjualan_id');
-        $this->applyFilters($itemBuilder, $filter, 'p.created_at', 'p.user_id', $cashierId);
-        $itemSummary = $itemBuilder->get()->getRowArray();
-
         return $this->response->setJSON([
             'total_transaksi' => (int) ($summary['total_transaksi'] ?? 0),
-            'omzet'           => (float) ($summary['omzet'] ?? 0),
-            'rata_transaksi'  => (float) ($summary['rata_transaksi'] ?? 0),
-            'total_item'      => (int) ($itemSummary['total_item'] ?? 0),
+            'omzet_kotor'     => (float) ($summary['omzet_kotor'] ?? 0),
+            'total_diskon'    => (float) ($summary['total_diskon'] ?? 0),
+            'total_modal'     => (float) ($summary['total_modal'] ?? 0),
+            'laba_bersih'     => (float) ($summary['laba_bersih'] ?? 0),
         ]);
     }
 
@@ -68,80 +56,34 @@ class Laporan extends BaseController
         $filter    = $this->resolveDateRange();
         $cashierId = $this->request->getGet('cashier_id');
 
-        $dailyBuilder = $this->db->table('penjualan p');
-        $dailyBuilder->select("DATE(p.created_at) as tanggal, COALESCE(SUM(p.total_harga), 0) as total", false);
-        $this->applyFilters($dailyBuilder, $filter, 'p.created_at', 'p.user_id', $cashierId);
-        $dailyBuilder->groupBy('DATE(p.created_at)');
-        $dailyBuilder->orderBy('DATE(p.created_at)', 'ASC');
-        $dailyRows = $dailyBuilder->get()->getResultArray();
-
-        $topProductBuilder = $this->db->table('penjualan_detail d');
-        $topProductBuilder->select('pr.nama_produk, COALESCE(SUM(d.qty), 0) as qty');
-        $topProductBuilder->join('penjualan p', 'p.id = d.penjualan_id');
-        $topProductBuilder->join('produk pr', 'pr.id = d.product_id');
-        $this->applyFilters($topProductBuilder, $filter, 'p.created_at', 'p.user_id', $cashierId);
-        $topProductBuilder->groupBy('d.product_id');
-        $topProductBuilder->orderBy('qty', 'DESC');
-        $topProductBuilder->limit(7);
-        $topProducts = $topProductBuilder->get()->getResultArray();
+        $builder = $this->db->table('penjualan p');
+        $builder->select("
+            DATE(p.created_at) as tanggal,
+            COALESCE(SUM(p.subtotal_kotor), 0) as omzet_kotor,
+            COALESCE(SUM(p.total_harga - p.total_modal), 0) as laba_bersih,
+            COALESCE(SUM(p.diskon_nominal), 0) as total_diskon
+        ", false);
+        $this->applyFilters($builder, $filter, 'p.created_at', 'p.user_id', $cashierId);
+        $builder->groupBy('DATE(p.created_at)');
+        $builder->orderBy('DATE(p.created_at)', 'ASC');
+        $rows = $builder->get()->getResultArray();
 
         return $this->response->setJSON([
-            'daily_series' => $this->fillDailySeries($filter['start_date'], $filter['end_date'], $dailyRows),
-            'top_products' => $topProducts,
+            'daily_series' => $this->fillDailySeries($filter['start_date'], $filter['end_date'], $rows),
         ]);
     }
 
-    public function riwayatData()
+    public function tableData()
     {
-        $rows = $this->getTransactionRows();
-
-        return view('laporan/partials/table_riwayat', [
-            'rows' => $rows,
-        ]);
-    }
-
-    public function detail($id)
-    {
-        $header = $this->db->table('penjualan p')
-            ->select('p.*, u.fullname, u.username, u.email')
-            ->join('users u', 'u.id = p.user_id')
-            ->where('p.id', $id)
-            ->get()
-            ->getRowArray();
-
-        if (! $header) {
-            return $this->response->setStatusCode(404)->setJSON([
-                'status'  => 'error',
-                'message' => 'Data transaksi tidak ditemukan.',
-            ]);
-        }
-
-        $items = $this->db->table('penjualan_detail d')
-            ->select('
-                d.qty,
-                d.subtotal,
-                COALESCE(d.nama_produk, pr.nama_produk) as nama_produk,
-                COALESCE(d.kode_produk, pr.kode_produk) as kode_produk,
-                COALESCE(d.harga_jual, pr.harga_jual) as harga_jual
-            ', false)
-            ->join('produk pr', 'pr.id = d.product_id', 'left')
-            ->where('d.penjualan_id', $id)
-            ->get()
-            ->getResultArray();
-
-        return $this->response->setJSON([
-            'status'     => 'success',
-            'invoice_no' => $this->formatInvoiceNo((int) $header['id'], $header['created_at']),
-            'header'     => $header,
-            'items'      => $items,
+        return view('keuntungan/partials/table', [
+            'rows' => $this->getProfitRows(),
         ]);
     }
 
     public function exportCsv()
     {
-        $rows = $this->getTransactionRows();
-
-        $filename = 'laporan_penjualan_' . date('Ymd_His') . '.csv';
+        $rows = $this->getProfitRows();
+        $filename = 'laporan_keuntungan_' . date('Ymd_His') . '.csv';
 
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename=' . $filename);
@@ -152,10 +94,12 @@ class Laporan extends BaseController
             'Invoice',
             'Tanggal',
             'Kasir',
-            'Total Item',
-            'Total Harga',
-            'Bayar',
-            'Kembalian'
+            'Member',
+            'Subtotal Kotor',
+            'Diskon',
+            'Modal',
+            'Total Jual',
+            'Laba Bersih',
         ]);
 
         foreach ($rows as $row) {
@@ -163,10 +107,12 @@ class Laporan extends BaseController
                 $this->formatInvoiceNo((int) $row['id'], $row['created_at']),
                 $row['created_at'],
                 $row['fullname'],
-                $row['total_item'],
+                $row['member_nama'] ?: '-',
+                $row['subtotal_kotor'],
+                $row['diskon_nominal'],
+                $row['total_modal'],
                 $row['total_harga'],
-                $row['bayar'],
-                $row['kembalian'],
+                $row['laba_bersih'],
             ]);
         }
 
@@ -178,18 +124,18 @@ class Laporan extends BaseController
     {
         $filter    = $this->resolveDateRange();
         $cashierId = $this->request->getGet('cashier_id');
-        $rows      = $this->getTransactionRows();
+        $rows      = $this->getProfitRows();
 
         $summaryBuilder = $this->db->table('penjualan p');
-        $summaryBuilder->select('COUNT(p.id) as total_transaksi, COALESCE(SUM(p.total_harga), 0) as omzet, COALESCE(AVG(p.total_harga), 0) as rata_transaksi');
+        $summaryBuilder->select('
+            COUNT(p.id) as total_transaksi,
+            COALESCE(SUM(p.subtotal_kotor), 0) as omzet_kotor,
+            COALESCE(SUM(p.diskon_nominal), 0) as total_diskon,
+            COALESCE(SUM(p.total_modal), 0) as total_modal,
+            COALESCE(SUM(p.total_harga - p.total_modal), 0) as laba_bersih
+        ');
         $this->applyFilters($summaryBuilder, $filter, 'p.created_at', 'p.user_id', $cashierId);
         $summary = $summaryBuilder->get()->getRowArray();
-
-        $itemBuilder = $this->db->table('penjualan_detail d');
-        $itemBuilder->select('COALESCE(SUM(d.qty), 0) as total_item');
-        $itemBuilder->join('penjualan p', 'p.id = d.penjualan_id');
-        $this->applyFilters($itemBuilder, $filter, 'p.created_at', 'p.user_id', $cashierId);
-        $itemSummary = $itemBuilder->get()->getRowArray();
 
         $cashierName = 'Semua Kasir';
         if (! empty($cashierId)) {
@@ -199,42 +145,51 @@ class Laporan extends BaseController
             }
         }
 
-        return view('laporan/print', [
-            'title'            => 'Print Laporan Penjualan',
-            'rows'             => $rows,
-            'summary'          => $summary,
-            'total_item'       => (int) ($itemSummary['total_item'] ?? 0),
-            'start_date'       => $filter['start_date'],
-            'end_date'         => $filter['end_date'],
-            'printed_at'       => date('d M Y H:i:s'),
-            'cashier_name'     => $cashierName,
-            'store_name'       => 'POS SAYA',
-            'store_subtitle'   => 'Sistem Informasi Kasir',
+        return view('keuntungan/print', [
+            'title'               => 'Print Laporan Keuntungan',
+            'rows'                => $rows,
+            'summary'             => $summary,
+            'start_date'          => $filter['start_date'],
+            'end_date'            => $filter['end_date'],
+            'printed_at'          => date('d M Y H:i:s'),
+            'cashier_name'        => $cashierName,
+            'store_name'          => 'POS SAYA',
+            'store_subtitle'      => 'Sistem Informasi Kasir',
             'report_generated_by' => session()->get('fullname') ?: 'Admin',
         ]);
     }
 
-    private function getTransactionRows(): array
+    private function getProfitRows(): array
     {
         $filter    = $this->resolveDateRange();
         $cashierId = $this->request->getGet('cashier_id');
         $keyword   = trim((string) $this->request->getGet('keyword'));
 
         $builder = $this->db->table('penjualan p');
-        $builder->select('p.id, p.created_at, p.total_harga, p.bayar, p.kembalian, u.fullname, COALESCE(SUM(d.qty), 0) as total_item');
-        $builder->join('users u', 'u.id = p.user_id');
-        $builder->join('penjualan_detail d', 'd.penjualan_id = p.id', 'left');
+        $builder->select('
+            p.id,
+            p.created_at,
+            p.member_nama,
+            p.subtotal_kotor,
+            p.diskon_nominal,
+            p.total_modal,
+            p.total_harga,
+            (p.total_harga - p.total_modal) as laba_bersih,
+            u.fullname
+        ');
+        $builder->join('users u', 'u.id = p.user_id', 'left');
 
         $this->applyFilters($builder, $filter, 'p.created_at', 'p.user_id', $cashierId);
 
         if ($keyword !== '') {
             $builder->groupStart()
                 ->like('u.fullname', $keyword)
+                ->orLike('p.member_nama', $keyword)
                 ->orLike('p.id', $keyword)
             ->groupEnd();
         }
 
-        return $builder->groupBy('p.id')
+        return $builder
             ->orderBy('p.created_at', 'DESC')
             ->get()
             ->getResultArray();
@@ -311,7 +266,11 @@ class Laporan extends BaseController
     {
         $mapped = [];
         foreach ($rows as $row) {
-            $mapped[$row['tanggal']] = (float) $row['total'];
+            $mapped[$row['tanggal']] = [
+                'omzet_kotor'  => (float) ($row['omzet_kotor'] ?? 0),
+                'laba_bersih'  => (float) ($row['laba_bersih'] ?? 0),
+                'total_diskon' => (float) ($row['total_diskon'] ?? 0),
+            ];
         }
 
         $result  = [];
@@ -321,9 +280,11 @@ class Laporan extends BaseController
         while ($current <= $end) {
             $date = date('Y-m-d', $current);
             $result[] = [
-                'label' => date('d M', $current),
-                'date'  => $date,
-                'total' => $mapped[$date] ?? 0,
+                'label'        => date('d M', $current),
+                'date'         => $date,
+                'omzet_kotor'  => $mapped[$date]['omzet_kotor'] ?? 0,
+                'laba_bersih'  => $mapped[$date]['laba_bersih'] ?? 0,
+                'total_diskon' => $mapped[$date]['total_diskon'] ?? 0,
             ];
             $current = strtotime('+1 day', $current);
         }
