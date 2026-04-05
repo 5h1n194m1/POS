@@ -72,11 +72,6 @@ $avatarUrl = !empty($avatar)
             position: relative;
         }
 
-        .desktop-sidebar-hotspot,
-        .desktop-burger-hotspot {
-            display: none;
-        }
-
         .main-header {
             height: var(--topbar-height);
             border-bottom: 1px solid rgba(226,232,240,.72) !important;
@@ -221,6 +216,19 @@ $avatarUrl = !empty($avatar)
             display: none !important;
         }
 
+        body.app-fullscreen.mobile-sidebar-open .main-sidebar {
+            display: block !important;
+        }
+
+        body.app-fullscreen.mobile-sidebar-open .mobile-sidebar-overlay {
+            display: block !important;
+        }
+
+        body.app-fullscreen.desktop-sidebar-open .main-sidebar,
+        body.app-fullscreen.mobile-sidebar-open .main-sidebar {
+            display: block !important;
+        }
+
         body.app-fullscreen .main-header {
             box-shadow: none !important;
             background: rgba(255,255,255,.92) !important;
@@ -289,6 +297,31 @@ $avatarUrl = !empty($avatar)
             padding: 0;
         }
 
+        #sidebarToggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #0f172a !important;
+            position: relative;
+            z-index: 1042;
+        }
+
+        .burger-icon {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 4px;
+            width: 20px;
+        }
+
+        .burger-icon span {
+            display: block;
+            width: 20px;
+            height: 2.5px;
+            border-radius: 999px;
+            background: currentColor;
+        }
+
         .theme-toggle-btn:hover,
         .fullscreen-toggle-btn:hover,
         .btn:hover {
@@ -341,7 +374,7 @@ $avatarUrl = !empty($avatar)
             position: fixed;
             inset: 0;
             background: rgba(15, 23, 42, 0.5);
-            z-index: 1039;
+            z-index: 1034;
         }
 
         .mobile-bottom-nav {
@@ -539,6 +572,12 @@ $avatarUrl = !empty($avatar)
             color: #60a5fa !important;
         }
 
+        body.dark-mode #sidebarToggle {
+            color: #f8fafc !important;
+            background: rgba(17, 24, 39, 0.94) !important;
+            border-color: rgba(71, 85, 105, 0.65) !important;
+        }
+
         body.dark-mode.app-fullscreen .main-header {
             background: rgba(17, 24, 39, 0.92) !important;
         }
@@ -553,27 +592,6 @@ $avatarUrl = !empty($avatar)
         }
 
         @media (min-width: 992px) {
-            .desktop-sidebar-hotspot,
-            .desktop-burger-hotspot {
-                display: block;
-                position: fixed;
-                z-index: 1043;
-            }
-
-            .desktop-sidebar-hotspot {
-                top: 0;
-                left: 0;
-                bottom: 0;
-                width: 22px;
-            }
-
-            .desktop-burger-hotspot {
-                top: 0;
-                left: 0;
-                width: 96px;
-                height: 88px;
-            }
-
             .main-sidebar {
                 position: fixed !important;
                 top: 0;
@@ -584,42 +602,43 @@ $avatarUrl = !empty($avatar)
                 pointer-events: none;
             }
 
-            body.desktop-sidebar-visible .main-sidebar,
-            body.desktop-sidebar-pinned .main-sidebar {
+            body.desktop-sidebar-open .main-sidebar {
                 transform: translateX(0);
                 opacity: 1;
                 pointer-events: auto;
             }
 
+            .main-header,
+            .content-wrapper,
+            .main-footer {
+                transition: margin-left .22s ease, opacity .18s ease !important;
+            }
+
+            body.desktop-sidebar-open .main-header,
+            body.desktop-sidebar-open .content-wrapper,
+            body.desktop-sidebar-open .main-footer {
+                margin-left: var(--sidebar-width) !important;
+            }
+
             #sidebarToggle {
-                position: fixed;
-                top: 12px;
-                left: 14px;
+                position: relative;
                 width: 44px;
                 height: 44px;
                 border-radius: 14px;
                 background: rgba(255, 255, 255, 0.92);
                 border: 1px solid rgba(226, 232, 240, 0.9);
                 box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
-                opacity: 0;
-                transform: translateY(-4px);
-                transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
-            }
-
-            body.desktop-burger-visible #sidebarToggle,
-            body.desktop-sidebar-visible #sidebarToggle,
-            body.desktop-sidebar-pinned #sidebarToggle {
                 opacity: 1;
-                transform: translateY(0);
+                transform: none;
+                transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
             }
 
             #sidebarToggle:hover {
                 box-shadow: 0 16px 28px rgba(15, 23, 42, 0.16);
             }
 
-            .main-header .navbar-nav:first-child {
-                position: relative;
-                z-index: 1044;
+            .main-header .navbar-nav {
+                align-items: center;
             }
 
             .content-header {
@@ -643,21 +662,6 @@ $avatarUrl = !empty($avatar)
                 padding-top: 1rem;
                 padding-bottom: 1rem;
             }
-
-            .utility-dock.is-collapsed .utility-dock-menu {
-                opacity: 0;
-                visibility: hidden;
-                transform: translateX(12px) scale(.94);
-                pointer-events: none;
-            }
-
-            .utility-dock:hover .utility-dock-menu,
-            .utility-dock.is-expanded .utility-dock-menu {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(0) scale(1);
-                pointer-events: auto;
-            }
         }
 
         /* MOBILE */
@@ -676,10 +680,12 @@ $avatarUrl = !empty($avatar)
                 transform: translateX(-100%);
                 margin-left: 0 !important;
                 position: fixed !important;
-                top: 0;
+                top: 58px;
                 bottom: 0;
+                height: calc(100vh - 58px);
                 opacity: 1;
                 pointer-events: auto;
+                z-index: 1034;
             }
 
             body.mobile-sidebar-open .main-sidebar {
@@ -695,6 +701,7 @@ $avatarUrl = !empty($avatar)
                 position: sticky;
                 top: 0;
                 box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+                z-index: 1046;
             }
 
             .content-wrapper {
@@ -737,6 +744,21 @@ $avatarUrl = !empty($avatar)
                 min-height: 44px;
                 display: flex;
                 align-items: center;
+            }
+
+            #sidebarToggle {
+                width: 42px;
+                height: 42px;
+                border-radius: 14px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid rgba(226, 232, 240, 0.92);
+                box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+                z-index: 1048;
+            }
+
+            body.mobile-sidebar-open #sidebarToggle {
+                position: relative;
+                z-index: 1049;
             }
 
             .topbar-utility {
@@ -846,6 +868,7 @@ $avatarUrl = !empty($avatar)
             body.dark-mode .mobile-bottom-nav a.active {
                 color: #60a5fa !important;
             }
+
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -871,17 +894,19 @@ $avatarUrl = !empty($avatar)
 <div class="wrapper">
 
     <div id="mobileSidebarOverlay" class="mobile-sidebar-overlay"></div>
-    <div id="desktopSidebarHotspot" class="desktop-sidebar-hotspot d-none d-lg-block"></div>
-    <div id="desktopBurgerHotspot" class="desktop-burger-hotspot d-none d-lg-block"></div>
 
     <nav class="main-header navbar navbar-expand navbar-light shadow-sm">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item mr-2">
                 <a class="nav-link" href="#" id="sidebarToggle" role="button">
-                    <i class="fas fa-bars"></i>
+                    <span class="burger-icon" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
                 </a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
+            <li class="nav-item">
                 <span class="nav-link font-weight-bold text-dark">POS Mobile Web</span>
             </li>
         </ul>
@@ -912,7 +937,7 @@ $avatarUrl = !empty($avatar)
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profil Saya
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="<?= base_url('logout') ?>" class="dropdown-item text-danger" onclick="return confirm('Yakin ingin keluar?')">
+                    <a href="<?= base_url('logout') ?>" class="dropdown-item text-danger js-logout-link">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i> Logout
                     </a>
                 </div>
@@ -1005,7 +1030,7 @@ $avatarUrl = !empty($avatar)
                     </li>
 
                     <li class="nav-item">
-                        <a href="<?= base_url('logout') ?>" class="nav-link text-danger" onclick="return confirm('Yakin ingin keluar?')">
+                        <a href="<?= base_url('logout') ?>" class="nav-link text-danger js-logout-link">
                             <i class="nav-icon fas fa-sign-out-alt"></i>
                             <p>Logout</p>
                         </a>
@@ -1083,12 +1108,10 @@ $avatarUrl = !empty($avatar)
 
     function toggleDesktopSidebar() {
         const body = $('body');
-        const nextPinned = !body.hasClass('desktop-sidebar-pinned');
+        const nextOpen = !body.hasClass('desktop-sidebar-open');
 
-        body.toggleClass('desktop-sidebar-pinned', nextPinned);
-        body.toggleClass('desktop-sidebar-visible', nextPinned);
-        body.toggleClass('desktop-burger-visible', nextPinned);
-        localStorage.setItem('pos_desktop_sidebar_pinned', nextPinned ? '1' : '0');
+        body.toggleClass('desktop-sidebar-open', nextOpen);
+        localStorage.setItem('pos_desktop_sidebar_open', nextOpen ? '1' : '0');
     }
 
     function expandUtilityDock() {
@@ -1104,27 +1127,11 @@ $avatarUrl = !empty($avatar)
     }
 
     function showDesktopSidebar() {
-        if (isMobileViewport()) {
-            return;
-        }
-
-        $('body')
-            .addClass('desktop-sidebar-visible')
-            .addClass('desktop-burger-visible');
+        return;
     }
 
     function hideDesktopSidebarIfNotPinned() {
-        if (isMobileViewport()) {
-            return;
-        }
-
-        if ($('body').hasClass('desktop-sidebar-pinned')) {
-            return;
-        }
-
-        $('body')
-            .removeClass('desktop-sidebar-visible')
-            .removeClass('desktop-burger-visible');
+        return;
     }
 
     function setupPageReveal() {
@@ -1225,12 +1232,9 @@ $avatarUrl = !empty($avatar)
         });
 
         if (!isMobileViewport()) {
-            const savedPinnedSidebar = localStorage.getItem('pos_desktop_sidebar_pinned');
-            if (savedPinnedSidebar === '1') {
-                $('body')
-                    .addClass('desktop-sidebar-pinned')
-                    .addClass('desktop-sidebar-visible')
-                    .addClass('desktop-burger-visible');
+            const savedSidebarOpen = localStorage.getItem('pos_desktop_sidebar_open');
+            if (savedSidebarOpen === '1') {
+                $('body').addClass('desktop-sidebar-open');
             }
         }
 
@@ -1248,6 +1252,35 @@ $avatarUrl = !empty($avatar)
             expandUtilityDock();
         });
 
+        $(document).on('click', '.js-logout-link', function(e) {
+            e.preventDefault();
+
+            const logoutUrl = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Keluar dari akun?',
+                text: 'Sesi Anda akan diakhiri dan Anda perlu login kembali untuk masuk.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Batal',
+                reverseButtons: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#64748b',
+                background: $('body').hasClass('dark-mode') ? '#1f2937' : '#ffffff',
+                color: $('body').hasClass('dark-mode') ? '#f8fafc' : '#0f172a',
+                customClass: {
+                    popup: 'shadow-lg rounded-lg',
+                    confirmButton: 'px-4',
+                    cancelButton: 'px-4'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = logoutUrl;
+                }
+            });
+        });
+
         $('#utilityDockToggle').on('click', function(e) {
             e.preventDefault();
             const dock = $('#utilityDock');
@@ -1260,6 +1293,7 @@ $avatarUrl = !empty($avatar)
 
         $('#sidebarToggle').on('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
 
             if (isMobileViewport()) {
                 if ($('body').hasClass('mobile-sidebar-open')) {
@@ -1287,9 +1321,7 @@ $avatarUrl = !empty($avatar)
                 closeMobileSidebar();
                 collapseUtilityDock();
             } else {
-                $('body')
-                    .removeClass('desktop-sidebar-visible')
-                    .removeClass('desktop-burger-visible');
+                $('body').removeClass('desktop-sidebar-open');
             }
         });
 
@@ -1316,8 +1348,24 @@ $avatarUrl = !empty($avatar)
         });
 
         $(document).on('click', function(e) {
-            if (!isMobileViewport()) {
-                return;
+            if (isMobileViewport() && $('body').hasClass('mobile-sidebar-open')) {
+                if (
+                    !$(e.target).closest('.main-sidebar').length &&
+                    !$(e.target).closest('#sidebarToggle').length
+                ) {
+                    closeMobileSidebar();
+                    return;
+                }
+            }
+
+            if (!isMobileViewport() && $('body').hasClass('desktop-sidebar-open')) {
+                if (
+                    !$(e.target).closest('.main-sidebar').length &&
+                    !$(e.target).closest('#sidebarToggle').length
+                ) {
+                    $('body').removeClass('desktop-sidebar-open');
+                    localStorage.setItem('pos_desktop_sidebar_open', '0');
+                }
             }
 
             if ($(e.target).closest('#utilityDock').length) {
@@ -1343,39 +1391,6 @@ $avatarUrl = !empty($avatar)
             setFullscreenIcons(isAppFullscreenEnabled() || !!document.fullscreenElement);
         });
 
-        $('#desktopBurgerHotspot').on('mouseenter', function() {
-            $('body').addClass('desktop-burger-visible');
-            showDesktopSidebar();
-        });
-
-        $('#desktopSidebarHotspot').on('mouseenter', function() {
-            showDesktopSidebar();
-        });
-
-        $('#sidebarToggle').on('mouseenter', function() {
-            if (!isMobileViewport()) {
-                $('body').addClass('desktop-burger-visible');
-            }
-        });
-
-        $('.main-sidebar').on('mouseenter', function() {
-            showDesktopSidebar();
-        });
-
-        $('#desktopBurgerHotspot, #desktopSidebarHotspot, .main-sidebar, #sidebarToggle').on('mouseleave', function() {
-            setTimeout(function() {
-                if (
-                    $('#desktopBurgerHotspot:hover').length ||
-                    $('#desktopSidebarHotspot:hover').length ||
-                    $('.main-sidebar:hover').length ||
-                    $('#sidebarToggle:hover').length
-                ) {
-                    return;
-                }
-
-                hideDesktopSidebarIfNotPinned();
-            }, 80);
-        });
     });
 </script>
 
